@@ -1,0 +1,32 @@
+{
+  "name": "shopstory-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "graphql": "^16.3.0",
+    "graphql-request": "^4.0.0",
+    "next": "12.1.0",
+    "postcss-mixins": "^9.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.21",
+    "@types/react": "17.0.39",
+    "eslint": "8.10.0",
+    "eslint-config-next": "12.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "postcss": "^8.4.8",
+    "postcss-custom-media": "^8.0.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-simple-vars": "^6.0.3",
+    "prettier": "^2.5.1",
+    "typescript": "4.6.2"
+  }
+}

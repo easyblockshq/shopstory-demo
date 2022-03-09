@@ -1,0 +1,39 @@
+:root {
+  /* Colors */
+  --color_black_01: #252525;
+  --color_white_01: #f9f8f3;
+
+  /* Sizes */
+  --size_01: 1px;
+  --size_02: 2px;
+  --size_03: 4px;
+  --size_04: 6px;
+  --size_05: 8px;
+  --size_06: 12px;
+  --size_07: 16px;
+  --size_08: 24px;
+  --size_09: 32px;
+  --size_10: 48px;
+  --size_11: 64px;
+  --size_12: 96px;
+  --size_13: 128px;
+  --size_14: 160px;
+  --size_15: 220px;
+  --size_16: 280px;
+
+  /* Typography */
+  --font_body_01: 16px;
+  --font_body_02: 13px;
+
+  /* Others */
+  --containerMargin: 5vw;
+  --headerHeight: 82px;
+  --headerHeightMobile: 60px;
+}
+
+/* Breakpoints */
+@custom-media --sm (min-width: 430px);
+@custom-media --md (min-width: 740px);
+@custom-media --lg (min-width: 1000px);
+@custom-media --xl (min-width: 1300px);
+@custom-media --xxl (min-width: 1900px);
