@@ -1,53 +1,57 @@
 .wrapper {
   position: fixed;
+  z-index: 9;
   width: 100%;
   height: var(--headerHeightMobile);
-  padding-left: var(--containerMargin);
-  padding-right: var(--containerMargin);
   background-color: var(--color_white_01);
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
+  @mixin container-standard;
+
+  @media (--md) {
+    height: var(--headerHeight);
+    background-color: inherit;
+  }
 }
 
 .leftContainer {
   display: flex;
+
+  @media (--md) {
+    display: none;
+  }
+
+  button {
+    @mixin font-heading02;
+  }
 }
 
 .brand {
   display: flex;
   justify-content: center;
+  @mixin font-body01;
+
+  @media (--md) {
+    justify-content: flex-start;
+  }
 }
 
 .nav {
   display: none;
-}
 
-.nav a {
-  font-size: var(--font_body_01);
+  @media (--md) {
+    display: flex;
+    justify-content: center;
+    gap: var(--size_09);
+  }
+
+  a {
+    @mixin font-heading02;
+  }
 }
 
 .rightContainer {
   display: flex;
   justify-content: flex-end;
-}
-
-@media (--md) {
-  .wrapper {
-    height: var(--headerHeight);
-    background-color: inherit;
-  }
-  .leftContainer {
-    display: none;
-  }
-
-  .brand {
-    justify-content: flex-start;
-  }
-
-  .nav {
-    display: flex;
-    justify-content: center;
-    gap: var(--size_09);
-  }
 }

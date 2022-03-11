@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'test-national-2';
+  src: url('test-national-2-medium.woff2') format('woff2');
+  font-display: block;
+}
+@font-face {
+  font-family: 'test-soehne-mono';
+  src: url('test-soehne-mono-leicht.woff2') format('woff2');
+  font-display: block;
+}

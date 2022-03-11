@@ -1,7 +1,16 @@
+/* Breakpoints */
+@custom-media --sm (min-width: 430px);
+@custom-media --md (min-width: 740px);
+@custom-media --lg (min-width: 1000px);
+@custom-media --xl (min-width: 1300px);
+@custom-media --xxl (min-width: 1900px);
+
 :root {
   /* Colors */
   --color_black_01: #252525;
+  --color_black_02: #4f4f4f;
   --color_white_01: #f9f8f3;
+  --color_beige_01: #f1f0ea;
 
   /* Sizes */
   --size_01: 1px;
@@ -21,9 +30,8 @@
   --size_15: 220px;
   --size_16: 280px;
 
-  /* Typography */
-  --font_body_01: 16px;
-  --font_body_02: 13px;
+  /* Containers */
+  --container_01: 480px;
 
   /* Others */
   --containerMargin: 5vw;
@@ -31,9 +39,46 @@
   --headerHeightMobile: 60px;
 }
 
-/* Breakpoints */
-@custom-media --sm (min-width: 430px);
-@custom-media --md (min-width: 740px);
-@custom-media --lg (min-width: 1000px);
-@custom-media --xl (min-width: 1300px);
-@custom-media --xxl (min-width: 1900px);
+/* Typography */
+@define-mixin typography-national {
+  font-family: 'test-national-2';
+}
+
+@define-mixin typography-soehne-mono {
+  font-family: 'test-soehne-mono';
+}
+
+/* Fonts */
+@define-mixin font-body01 {
+  @mixin typography-soehne-mono;
+  font-size: 20px;
+}
+
+@define-mixin font-body02 {
+  @mixin typography-soehne-mono;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+@define-mixin font-heading01 {
+  @mixin typography-national;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+@define-mixin font-heading02 {
+  @mixin typography-national;
+  font-size: 16px;
+}
+
+@define-mixin font-heading03 {
+  @mixin typography-national;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Containers */
+@define-mixin container-standard {
+  padding-left: var(--containerMargin);
+  padding-right: var(--containerMargin);
+}

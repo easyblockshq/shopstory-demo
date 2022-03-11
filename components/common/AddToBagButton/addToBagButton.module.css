@@ -1,0 +1,11 @@
+.button {
+  @mixin font-heading02;
+  padding-top: var(--size_06);
+  padding-bottom: var(--size_06);
+  background-color: var(--color_black_01);
+  border-radius: 4px;
+  color: var(--color_white_01);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
