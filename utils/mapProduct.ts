@@ -1,4 +1,3 @@
-import { ShopifyProductVariantRes } from '../types'
 import { removeEdges } from './removeEdges'
 
 export const mapProduct = (product: any) => {

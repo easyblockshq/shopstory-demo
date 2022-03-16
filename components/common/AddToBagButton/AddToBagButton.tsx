@@ -1,10 +1,10 @@
-import styles from './addToBagButton.module.css'
+import { Button } from '../Button/Button'
 
-const AddToBagButton = (props: any) => {
+const AddToBagButton = ({ ...restProps }) => {
   return (
-    <button className={styles.button} {...props}>
+    <Button appearance={'solidBlack'} {...restProps}>
       Add to cart
-    </button>
+    </Button>
   )
 }
 

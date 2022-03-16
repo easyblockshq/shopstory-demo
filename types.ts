@@ -14,17 +14,25 @@ export type ShopifyMedia = {
 
 export type ShopifyProduct = {
   title: string
+  handle: string
   descriptionHtml: string
   price: ShopifyPrice
   compareAtPrice: ShopifyPrice
   media: [MediaObject]
+  primaryImage?: MediaObject
+  secondaryImage?: MediaObject
 }
 
-export type ShopifyProductVariantRes = {
-  id: string
+export type ShopifyCollection = {
   title: string
-  priceV2: ShopifyPrice
-  compareAtPriceV2: ShopifyPrice
+  id: string
+  handle: string
+  descriptionHtml?: string
+  products: [ShopifyProduct]
+}
+
+export type PLPProps = {
+  collection: ShopifyCollection
 }
 
 export type ImageObject = {

@@ -1,4 +1,4 @@
-.button {
+.solidBlack {
   @mixin font-heading02;
   padding-top: var(--size_06);
   padding-bottom: var(--size_06);
@@ -8,4 +8,8 @@
   display: block;
   width: 100%;
   text-align: center;
+}
+
+.solidRed {
+  background-color: red;
 }
