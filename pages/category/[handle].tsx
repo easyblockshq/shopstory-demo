@@ -4,12 +4,13 @@ import { useMemo } from 'react'
 import ProductListing from '../../components/sections/ProductListing'
 import fetchAllCollectionHandles from '../../data/shopify/fetchAllCollectionHandles'
 import fetchCollectionByHandle from '../../data/shopify/fetchCollectionByHandle'
+import { filterCollection } from '../../data/shopify/filterCollection'
 import { PLPProps } from '../../types'
+import { decomposeHandle } from '../../utils/collectionsHandle'
+import { decodeCollectionProps, encodeCollectionProps } from '../../utils/encodeCollectionProps'
 
 const Page: NextPage<PLPProps> = (props) => {
-  //const newProps = useMemo(() => decodeCollectionProps(props), [props.collection])
-
-  const newProps = props
+  const newProps = useMemo(() => decodeCollectionProps(props), [props.collection])
   return (
     <>
       <Head>
@@ -35,18 +36,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params?.handle) throw new Error('Catch all accessed without given [handle]')
   if (typeof params.handle !== 'string') throw new Error('Catch all accessed with wrong type of [handle]')
 
-  const responses = await Promise.all([fetchCollectionByHandle(params.handle)])
-  const collection = responses[0]
+  const { handle, values } = decomposeHandle(params.handle)
 
-  if (!collection) {
+  const responses = await Promise.all([fetchCollectionByHandle(handle)])
+  const fullCollection = responses[0]
+
+  if (!fullCollection) {
     return {
       notFound: true
     }
   }
 
-  const props = { collection }
-  //const newProps = encodeCollectionProps(props)
-  const newProps = props
+  const { filters, collection, pagination, numberOfItems } = filterCollection(fullCollection, values)
+
+  const newProps = encodeCollectionProps({ collection, filters, pagination, fullCollection, numberOfItems })
 
   return {
     props: {

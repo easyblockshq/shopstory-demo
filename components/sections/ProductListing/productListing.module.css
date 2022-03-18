@@ -7,7 +7,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   @mixin container-standard;
   padding-top: var(--size_10);
   padding-bottom: var(--size_10);
@@ -21,9 +21,24 @@
   max-width: var(--container_02);
 }
 
-.filters {
+.filtersContainer {
   padding-top: var(--size_10);
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.counter {
+  @mixin font-heading03;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color_black_01);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  color: var(--color_white_01);
+  margin-left: var(--size_06);
 }
 
 .title {
@@ -49,4 +64,93 @@
   @media (--xl) {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.filters {
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  height: 100%;
+  min-height: 100%;
+  background-color: var(--color_black_01);
+  color: var(--color_white_01);
+  padding: var(--size_09);
+  overflow-y: hidden;
+  width: 100vw;
+  max-width: var(--container_01);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: var(--size_09);
+}
+
+.modalHeading {
+  @mixin font-body02;
+}
+
+.modalContent {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sortBox {
+    margin-bottom: var(--size_10);
+  }
+
+  .filterBox {
+    margin-bottom: var(--size_09);
+  }
+}
+
+.filterHeading {
+  @mixin font-body02;
+  margin-bottom: var(--size_07);
+}
+
+.filterSelect {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin-bottom: var(--size_05);
+  }
+}
+
+.filterMultiselect {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--size_05);
+}
+
+.filterColorselect {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    margin-bottom: var(--size_07);
+  }
+}
+
+.modalFooter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: var(--size_05);
+  justify-content: space-between;
+  padding-top: var(--size_08);
+}
+
+.colorInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size_09);
+  height: var(--size_09);
+  background-color: var(--color_black_03);
+  border-radius: 50%;
+  color: var(--color_white_01);
+  margin-bottom: var(--size_05);
 }

@@ -11,8 +11,8 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
       <div className={styles.gallery}>
         {product.media &&
           product.media.map((item, i) => (
-            <div key={i}>
-              <Media media={item} ratio={'landscape3'} sizes="(min-width: 740px) 50vw, 100vw" />
+            <div key={i} className={styles.galleryItem}>
+              <Media media={item} ratio={'landscape3'} sizes="(min-width: 1000px) calc(100vw - 480px), 100vw" />
             </div>
           ))}
       </div>

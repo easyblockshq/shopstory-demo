@@ -5,13 +5,15 @@ import Head from 'next/head'
 import Header from '../components/common/Header'
 import Footer from '../components/common/Footer/Footer'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { setAppElement } from 'react-modal'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
-  if (router.isFallback) {
-    return <div>Loading...</div>
-  }
+  useEffect(() => {
+    setAppElement('#modalContainer')
+  }, [])
 
   return (
     <>
@@ -20,8 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Header />
 
-      <Component {...pageProps} />
+      {router.isFallback && <div>Loading...</div>}
+      {!router.isFallback && <Component {...pageProps} />}
+
       <Footer />
+      <div id={'modalContainer'} />
     </>
   )
 }

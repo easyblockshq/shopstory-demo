@@ -5,11 +5,147 @@
   background-color: var(--color_black_01);
   border-radius: 4px;
   color: var(--color_white_01);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   text-align: center;
 }
 
-.solidRed {
-  background-color: red;
+.solidWhite {
+  @mixin font-heading02;
+  padding-top: var(--size_06);
+  padding-bottom: var(--size_06);
+  background-color: var(--color_white_01);
+  border-radius: 4px;
+  color: var(--color_black_01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.solidGrey {
+  @mixin font-heading02;
+  padding-top: var(--size_06);
+  padding-bottom: var(--size_06);
+  background-color: rgba(249, 248, 243, 0.2);
+  border-radius: 4px;
+  color: var(--color_white_01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.outlineBlack {
+  @mixin font-heading02;
+  padding-top: var(--size_06);
+  padding-bottom: var(--size_06);
+  background-color: inherit;
+  border-radius: 4px;
+  color: var(--color_black_01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  border: 2px solid var(--color_black_01);
+}
+
+.sizeMedium {
+  width: auto;
+  padding-right: var(--size_07);
+  padding-left: var(--size_07);
+  padding-top: var(--size_05);
+  padding-bottom: var(--size_05);
+}
+
+.radioButton {
+  @mixin font-heading03;
+  position: relative;
+  text-align: left;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--color_white_01);
+    margin-right: var(--size_06);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color_white_01);
+    left: 7px;
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+
+  &.inactive {
+    &:before {
+      border-color: var(--color_white_02);
+    }
+    &:after {
+      opacity: 0;
+    }
+  }
+}
+
+.checkboxButton {
+  @mixin font-heading03;
+  padding-top: var(--size_06);
+  padding-bottom: var(--size_06);
+  background-color: inherit;
+  border-radius: 4px;
+  color: var(--color_white_01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--color_white_01);
+  transition: color, border-color 0.2s;
+
+  &.inactive {
+    color: var(--color_grey_01);
+    border-color: var(--color_black_02);
+
+    &:hover {
+      border-color: var(--color_white_02);
+    }
+  }
+}
+
+.colorButton {
+  @mixin font-heading03;
+  color: var(--color_white_01);
+  width: 80px;
+  transition: opacity 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+
+  @media (--sm) {
+    width: 98px;
+  }
+
+  &.inactive {
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }

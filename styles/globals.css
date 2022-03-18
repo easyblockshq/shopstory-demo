@@ -1,5 +1,6 @@
 @import 'variables.css';
 @import 'reset.css';
+@import '../components/common/Modal/modal.css';
 
 html,
 body {

@@ -9,8 +9,11 @@
   /* Colors */
   --color_black_01: #252525;
   --color_black_02: #4f4f4f;
+  --color_black_03: #000000;
   --color_white_01: #f9f8f3;
+  --color_white_02: #bdbdbd;
   --color_beige_01: #f1f0ea;
+  --color_grey_01: #a0a09d;
 
   /* Sizes */
   --size_01: 1px;

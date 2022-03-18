@@ -38,16 +38,19 @@ export const mapProduct = (product: any) => {
   let primaryImage = productImages[0] ?? null
   let secondaryImage = productImages[1] ?? null
 
-  //const colorName = product.tags.find((tag) => tag.includes('color'))?.split('-')[1] ?? null
+  const material = productVariants.map((variant: any) => ({
+    id: variant.title.toLowerCase().replace(/\s/g, '-'),
+    label: variant.title
+  }))
 
-  //const sizes = productVariants.map((variant) => ({ id: variant.title, label: variant.title })) // Imporant! We treat size as ID. This removes duplicates from filtering, makes nice URLs for size filtering etc. We don't need this ID.
-
-  //   const _color = COLORS.find((c) => c.name === colorName)
-  //   const color = {
-  //     name: colorName,
-  //     hex: _color ? _color.hex : 'ruby',
-  //     isLight: _color ? _color.isLight : false
-  //   }
+  let room: any = []
+  product.tags.map((tag: string) => {
+    if (tag.includes('room-')) {
+      room.push({
+        name: tag.toLowerCase().replace('room-', '')
+      })
+    }
+  })
 
   const prices = productVariants.map((variant: any) => variant.priceV2)
 
@@ -57,9 +60,9 @@ export const mapProduct = (product: any) => {
   const compareAtPrice = compareAtPrices[0]
 
   const restProduct = {
-    //sizes,
+    material,
     tags: product.tags,
-    //color,
+    room,
     media:
       product.media && productMedia
         ? [...productMedia.filter((e: any) => e.type === 'VIDEO'), ...productImages]
@@ -74,16 +77,16 @@ export const mapProduct = (product: any) => {
   return {
     ...product,
     ...restProduct,
-    variants: productVariants.map((variant) => ({
-      //   title: variant.title,
-      //   id: variant.id,
-      //   quantityAvailable: variant.quantityAvailable,
-      //   sku: variant.sku,
-      //   available: variant.availableForSale,
-      //   size: { id: variant.title, label: variant.title },
+    variants: productVariants.map((variant: any) => ({
+      title: variant.title,
+      id: variant.id,
+      quantityAvailable: variant.quantityAvailable,
+      sku: variant.sku,
+      available: variant.availableForSale,
+      material: { id: variant.title.toLowerCase().replace(/\s/g, '-'), label: variant.title },
       isLowStock: false,
       isFinalSale: false,
-      //color,
+      room,
       productId: product.id,
       productHandle: product.handle
     }))

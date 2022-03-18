@@ -1,0 +1,30 @@
+body.ReactModal__Body--open {
+  //overflow: hidden;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1 !important;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0 !important;
+}
+
+.ReactModal__Animation--right {
+  @media (--md) {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 200ms ease-in;
+
+    .ReactModal__Overlay--after-open & {
+      transform: translateX(0px);
+      opacity: 1;
+      transition: all 400ms ease-in-out;
+    }
+    .ReactModal__Overlay--before-close & {
+      transform: translateX(100%);
+      opacity: 0;
+      transition: all 200ms ease-in;
+    }
+  }
+}

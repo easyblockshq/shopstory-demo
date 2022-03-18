@@ -7,7 +7,9 @@ export const StyledClickable: FC<ButtonProps | LinkObjProps> = ({
   children,
   as,
   appearance,
+  size,
   additionalClass,
+  active = true,
   ...restProps
 }) => {
   let classes = []
@@ -21,10 +23,37 @@ export const StyledClickable: FC<ButtonProps | LinkObjProps> = ({
       case 'solidBlack':
         classes.push(styles.solidBlack)
         break
-      case 'solidRed':
-        classes.push(styles.solidRed)
+      case 'solidWhite':
+        classes.push(styles.solidWhite)
+        break
+      case 'solidGrey':
+        classes.push(styles.solidGrey)
+        break
+      case 'outlineBlack':
+        classes.push(styles.outlineBlack)
+        break
+      case 'radioButton':
+        classes.push(styles.radioButton)
+        break
+      case 'checkboxButton':
+        classes.push(styles.checkboxButton)
+        break
+      case 'colorButton':
+        classes.push(styles.colorButton)
         break
     }
+  }
+
+  if (size) {
+    switch (size) {
+      case 'medium':
+        classes.push(styles.sizeMedium)
+        break
+    }
+  }
+
+  if (!active) {
+    classes.push(styles.inactive)
   }
 
   if (as === 'a') {
@@ -42,12 +71,21 @@ export const StyledClickable: FC<ButtonProps | LinkObjProps> = ({
   }
 }
 
-type Appearance = 'solidBlack' | 'solidRed' | undefined
+export type Appearance =
+  | 'solidBlack'
+  | 'solidWhite'
+  | 'solidGrey'
+  | 'outlineBlack'
+  | 'radioButton'
+  | 'checkboxButton'
+  | 'colorButton'
+  | undefined
 
 export type StyledClickableProps = {
   as?: 'a' | 'button'
-  //size?: 'large' | 'medium' | 'small' | 'wide'
+  size?: 'large' | 'medium' | 'small' | 'wide'
   appearance?: Appearance
+  active?: boolean
   tabIndex?: number
   children: any
   additionalClass?: string

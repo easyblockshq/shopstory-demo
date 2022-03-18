@@ -1,16 +1,67 @@
 .wrapper {
   display: grid;
 
-  @media (--md) {
+  @media (--lg) {
     grid-template-columns: 1fr var(--container_01);
   }
 }
 
 .gallery {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  width: 100%;
+  position: relative;
   padding-top: var(--headerHeightMobile);
+  //padding-bottom: var(--size_08);
+
   @media (--md) {
+    display: block;
     background-color: var(--color_beige_01);
     padding-top: var(--headerHeight);
+    padding-bottom: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    border-radius: 1.5px;
+    background-color: #bdbdbd;
+    width: 2px;
+    height: 2px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color_black_01);
+    border-radius: 1.5px;
+  }
+
+  &::scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::scrollbar {
+    border-radius: 1.5px;
+    background-color: #bdbdbd;
+    width: 2px;
+    height: 2px;
+  }
+  &::scrollbar-thumb {
+    background-color: var(--color_beige_01);
+    border-radius: 1.5px;
+  }
+}
+
+.galleryItem {
+  width: 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
+
+  @media (--md) {
+    scroll-snap-align: unset;
   }
 }
 
