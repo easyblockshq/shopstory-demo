@@ -72,7 +72,7 @@ const ProductListing: FC<PLPProps> = (props) => {
   // console.log(fullHandle)
   // console.log(activeFiltersCount)
 
-  const [isFilterModalOpen, setFilterModalOpen] = useState<boolean>(true)
+  const [isFilterModalOpen, setFilterModalOpen] = useState<boolean>(false)
   const toggleFilterModal = () => {
     setFilterModalOpen(!isFilterModalOpen)
   }
