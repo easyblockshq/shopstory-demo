@@ -1,4 +1,4 @@
-import { ShopifyProduct, ShopifyProductMaterial, ShopifyProductRoom, ShopifyRAWProduct } from '../types'
+import { ShopifyProductMaterial, ShopifyProductRoom } from '../types'
 import { removeEdges } from './removeEdges'
 
 export const mapProduct = (product: any) => {

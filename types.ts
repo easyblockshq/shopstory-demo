@@ -9,61 +9,12 @@ export type ShopifyPrice = {
   currencyCode: string
 }
 
-export type ShopifyMedia = {
-  originalSrc: string
-  id?: string
-  altText?: string
-  from?: 'shopify'
-  type?: 'IMAGE' | 'VIDEO'
-  sources?: any
-}
-
 export type ShopifyProductMaterial = {
   name: string
 }
 
 export type ShopifyProductRoom = {
   name: string
-}
-
-export type ShopifyProductVariant = {
-  availableForSale: any
-  id?: string
-  title?: string
-  price?: string
-  quantityAvailable?: number
-  currentlyNotInStock?: boolean
-  selectedOptions?: {
-    name: string
-    value: string
-  }
-  priceV2?: any
-  compareAtPriceV2?: any
-  sku?: any
-}
-
-export type ShopifyRAWProduct = {
-  id: string
-  handle: string
-  tags: string[]
-  productType?: string
-  publishedAt: string
-  descriptionHtml?: string
-  title: string
-  vendor?: string
-  description?: string
-  collections: {
-    edges: any[]
-  }
-  variants: {
-    edges: any[]
-  }
-  images: {
-    edges: any[]
-  }
-  media?: {
-    edges: any[]
-  }
 }
 
 export type ShopifyProduct = {

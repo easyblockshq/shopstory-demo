@@ -1,4 +1,3 @@
-import { ShopifyProduct, ShopifyRAWProduct } from '../../types'
 import { mapCollection } from '../../utils/mapCollection'
 import fetchProducts from './fetchProducts'
 import fetchShopify from './fetchShopify'

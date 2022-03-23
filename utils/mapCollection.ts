@@ -1,4 +1,4 @@
-import { ShopifyCollection, ShopifyCollectionWithEdges } from '../types'
+import { ShopifyCollectionWithEdges } from '../types'
 import { mapProduct } from './mapProduct'
 import { removeEdges } from './removeEdges'
 

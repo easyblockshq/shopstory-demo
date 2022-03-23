@@ -1,4 +1,5 @@
 .wrapper {
+  padding-bottom: var(--size_07);
 }
 
 .thumbnail {
@@ -19,7 +20,7 @@
 
 .info {
   text-align: center;
-  padding: var(--size_07);
+  padding: var(--size_07) var(--size_07) 0 var(--size_07);
 }
 
 .title {

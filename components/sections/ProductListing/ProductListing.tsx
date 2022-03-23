@@ -9,7 +9,6 @@ import { Button } from '../../common/Button/Button'
 import { filterCollection, getCollectionColor } from '../../../data/shopify/filterCollection'
 import { Appearance } from '../../common/StyledClickable/StyledClickable'
 import CloseIcon from '../../icons/CloseIcon'
-import type { ParsedUrlQuery } from 'querystring'
 
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0

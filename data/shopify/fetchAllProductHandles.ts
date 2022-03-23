@@ -10,9 +10,10 @@ async function fetchAllProductHandles() {
 
     let lastProductCursor = null
     let hasNextPage = false
+    let data
 
     do {
-      const data: any = await fetchShopify(fetchProductsHandlesQuery, {
+      data = await fetchShopify(fetchProductsHandlesQuery, {
         query: '',
         sortKey: 'CREATED_AT',
         sortIndex: 0,
