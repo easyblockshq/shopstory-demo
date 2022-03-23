@@ -1,3 +1,5 @@
+import CartIcon from '../../icons/CartIcon'
+import SearchIcon from '../../icons/SearchIcon'
 import { Button } from '../Button/Button'
 import { Link } from '../Link/Link'
 import styles from './header.module.css'
@@ -24,7 +26,22 @@ const Header = () => {
         <Link href={`/category/furniture`}>Furniture</Link>
         <Link href={`/category/accessories`}>Accessories</Link>
       </div>
-      <div className={styles.rightContainer}>Icons</div>
+      <div className={styles.rightContainer}>
+        <Button
+          onClick={() => {
+            console.log('Search button click')
+          }}
+        >
+          <SearchIcon />
+        </Button>
+        <Button
+          onClick={() => {
+            console.log('Cart button click')
+          }}
+        >
+          <CartIcon />
+        </Button>
+      </div>
     </div>
   )
 }

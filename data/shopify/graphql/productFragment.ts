@@ -6,13 +6,13 @@ export const PRODUCT_FRAGMENT = gql`
   fragment ProductFragment on Product {
     id
     handle
-    description
-    descriptionHtml
-    title
     tags
     productType
     publishedAt
+    descriptionHtml
+    title
     vendor
+    description
     collections(first: 5) {
       edges {
         node {

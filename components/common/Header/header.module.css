@@ -54,4 +54,23 @@
 .rightContainer {
   display: flex;
   justify-content: flex-end;
+
+  button {
+    margin-left: var(--size_02);
+    padding: var(--size_06);
+    display: none;
+
+    @media (--sm) {
+      display: block;
+    }
+
+    @media (--md) {
+      margin-left: var(--size_07);
+    }
+
+    &:last-child {
+      margin-right: calc(-1 * var(--size_06));
+      display: block;
+    }
+  }
 }

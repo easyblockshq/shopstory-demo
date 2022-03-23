@@ -2,8 +2,10 @@ import styles from './productDetails.module.css'
 import React, { FC } from 'react'
 import { ShopifyProduct } from '../../../types'
 import { formatPrice } from '../../../utils/formatPrice'
-import AddToBagButton from '../../common/AddToBagButton'
+import AddToBagButton from '../../common/AddToBagButton/AddToBagButton'
 import { Media } from '../../common/Media/Media'
+import { Link } from '../../common/Link/Link'
+import { getCollectionColor } from '../../../data/shopify/filterCollection'
 
 const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
   return (
@@ -19,11 +21,32 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
       <div className={styles.contentWrapper}>
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.details}>
-          <div className={styles.material}>Oak</div>
+          {product.material && product.material?.length > 0 && (
+            <div className={styles.material}>{getCollectionColor(product.material[0].name)?.fullName}</div>
+          )}
           <div className={styles.prices}>
             {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}
             {product.compareAtPrice && <p className={styles.priceCompare}>{formatPrice(product.compareAtPrice)}</p>}
           </div>
+          {product.relatedProducts && product.relatedProducts?.length > 1 && (
+            <div className={styles.related}>
+              {product.relatedProducts.map((rproduct, i) => {
+                let relatedLinkClasses = [styles.relatedProduct]
+                if (product.handle === rproduct.handle) {
+                  relatedLinkClasses.push(styles.relatedProductActive)
+                }
+                return (
+                  <Link href={'/products/' + rproduct.handle} key={i} className={relatedLinkClasses.join(' ')}>
+                    {rproduct.primaryImage ? (
+                      <Media media={rproduct.primaryImage} sizes="80px" />
+                    ) : (
+                      <div className={styles.placeholder}>No image</div>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
         </div>
         <div className={styles.actions}>
           <AddToBagButton

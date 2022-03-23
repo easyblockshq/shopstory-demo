@@ -4,16 +4,19 @@ const COLORS = [
   {
     hex: '#000000',
     name: 'black-oak',
+    fullName: 'Black oak',
     isLight: false
   },
   {
     hex: '#CEBEA9',
     name: 'oak',
+    fullName: 'Oak',
     isLight: false
   },
   {
     hex: '#43496F',
     name: 'blue-oak',
+    fullName: 'Blue oak',
     isLight: false
   }
 ]
@@ -47,7 +50,7 @@ const filterCollectionFunction = (collection: any, options: any) => {
 
   if (Array.isArray(options.material)) {
     const products = collection.products.filter(
-      (p: any) => p.variants.filter((v: any) => v.available && options.material.includes(v.material.id)).length > 0
+      (p: any) => p.material.filter((m: any) => m.name && options.material.includes(m.name)).length > 0
     )
 
     collection = {

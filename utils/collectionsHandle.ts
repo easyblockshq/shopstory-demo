@@ -1,4 +1,11 @@
-export const buildHandle = (handle: string, values: any) => {
+type URLValues = {
+  sort: string
+  material: string[]
+  room: string[]
+  page: number
+}
+
+export const buildHandle = (handle: string, values: URLValues) => {
   let ret = handle
 
   if (values.sort) {
@@ -7,14 +14,14 @@ export const buildHandle = (handle: string, values: any) => {
   if (Array.isArray(values.material) && values.material.length > 0) {
     ret += '__material'
 
-    values.material.forEach((c: any) => {
+    values.material.forEach((c: string) => {
       ret += `_${c}`
     })
   }
   if (Array.isArray(values.room) && values.room.length > 0) {
     ret += '__room'
 
-    values.room.forEach((c: any) => {
+    values.room.forEach((c: string) => {
       ret += `_${c}`
     })
   }

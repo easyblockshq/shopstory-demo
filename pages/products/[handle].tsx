@@ -1,9 +1,9 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import ProductDetails from '../../components/sections/ProductDetails'
+import ProductDetails from '../../components/sections/ProductDetails/ProductDetails'
 import fetchAllProductHandles from '../../data/shopify/fetchAllProductHandles'
 import fetchProductByHandle from '../../data/shopify/fetchProductByHandle'
-import { ShopifyProduct } from '../../types'
+import { Path, ShopifyProduct } from '../../types'
 
 const Page: NextPage<ShopifyProduct> = (product) => {
   return (
@@ -18,7 +18,7 @@ const Page: NextPage<ShopifyProduct> = (product) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths: any[] = []
+  let paths: Path[] = []
 
   if (process.env.IS_VERCEL_PREVIEW !== 'true') {
     const handles = await fetchAllProductHandles()

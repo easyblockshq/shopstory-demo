@@ -107,6 +107,35 @@
       );
     }
   }
+
+  .related {
+    margin-top: var(--size_10);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .relatedProduct {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 70px;
+    margin-right: var(--size_05);
+    padding: var(--size_01);
+  }
+
+  .relatedProductActive {
+    border: 1px solid var(--color_black_03);
+    border-radius: 4px;
+  }
+
+  .placeholder {
+    @mixin font-body02;
+    text-align: center;
+    font-size: 10px;
+  }
 }
 
 .actions {

@@ -1,3 +1,9 @@
+export type Path = {
+  params: {
+    handle: string[]
+  }
+}
+
 export type ShopifyPrice = {
   amount: string
   currencyCode: string
@@ -12,6 +18,54 @@ export type ShopifyMedia = {
   sources?: any
 }
 
+export type ShopifyProductMaterial = {
+  name: string
+}
+
+export type ShopifyProductRoom = {
+  name: string
+}
+
+export type ShopifyProductVariant = {
+  availableForSale: any
+  id?: string
+  title?: string
+  price?: string
+  quantityAvailable?: number
+  currentlyNotInStock?: boolean
+  selectedOptions?: {
+    name: string
+    value: string
+  }
+  priceV2?: any
+  compareAtPriceV2?: any
+  sku?: any
+}
+
+export type ShopifyRAWProduct = {
+  id: string
+  handle: string
+  tags: string[]
+  productType?: string
+  publishedAt: string
+  descriptionHtml?: string
+  title: string
+  vendor?: string
+  description?: string
+  collections: {
+    edges: any[]
+  }
+  variants: {
+    edges: any[]
+  }
+  images: {
+    edges: any[]
+  }
+  media?: {
+    edges: any[]
+  }
+}
+
 export type ShopifyProduct = {
   title: string
   handle: string
@@ -21,6 +75,23 @@ export type ShopifyProduct = {
   media: MediaObject[]
   primaryImage?: MediaObject
   secondaryImage?: MediaObject
+  relatedProducts?: ShopifyProduct[]
+  tags?: string[]
+  material?: ShopifyProductMaterial[]
+}
+
+export type ShopifyCollectionWithEdges = {
+  title: string
+  id: string
+  handle: string
+  descriptionHtml?: string
+  products: {
+    pageInfo: {
+      hasNextPage: boolean
+      hasPreviousPage: boolean
+    }
+    edges: any
+  }
 }
 
 export type ShopifyCollection = {

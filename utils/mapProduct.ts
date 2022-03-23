@@ -1,3 +1,4 @@
+import { ShopifyProduct, ShopifyProductMaterial, ShopifyProductRoom, ShopifyRAWProduct } from '../types'
 import { removeEdges } from './removeEdges'
 
 export const mapProduct = (product: any) => {
@@ -38,12 +39,16 @@ export const mapProduct = (product: any) => {
   let primaryImage = productImages[0] ?? null
   let secondaryImage = productImages[1] ?? null
 
-  const material = productVariants.map((variant: any) => ({
-    id: variant.title.toLowerCase().replace(/\s/g, '-'),
-    label: variant.title
-  }))
+  let material: ShopifyProductMaterial[] = []
+  product.tags.map((tag: string) => {
+    if (tag.includes('material-')) {
+      material.push({
+        name: tag.toLowerCase().replace('material-', '')
+      })
+    }
+  })
 
-  let room: any = []
+  let room: ShopifyProductRoom[] = []
   product.tags.map((tag: string) => {
     if (tag.includes('room-')) {
       room.push({
@@ -53,9 +58,7 @@ export const mapProduct = (product: any) => {
   })
 
   const prices = productVariants.map((variant: any) => variant.priceV2)
-
   const compareAtPrices = productVariants.map((variant: any) => variant.compareAtPriceV2)
-
   const price = prices[0]
   const compareAtPrice = compareAtPrices[0]
 
@@ -83,9 +86,9 @@ export const mapProduct = (product: any) => {
       quantityAvailable: variant.quantityAvailable,
       sku: variant.sku,
       available: variant.availableForSale,
-      material: { id: variant.title.toLowerCase().replace(/\s/g, '-'), label: variant.title },
       isLowStock: false,
       isFinalSale: false,
+      material,
       room,
       productId: product.id,
       productHandle: product.handle

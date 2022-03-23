@@ -179,12 +179,12 @@ input:focus-visible + label {
   outline-offset: -2px;
 }
 
-_::-webkit-full-page-media,
 _:future,
-:root button:focus,
-:root a:focus {
+:root button:focus-visible,
+:root a:focus-visible {
   outline: #36b7b2 solid 3px;
-  outline-offset: -2px;
+  outline-offset: 4px;
+  z-index: 2;
 }
 
 .sr-only {

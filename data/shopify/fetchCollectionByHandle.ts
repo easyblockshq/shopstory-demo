@@ -1,15 +1,18 @@
+import { ShopifyProduct, ShopifyRAWProduct } from '../../types'
 import { mapCollection } from '../../utils/mapCollection'
+import fetchProducts from './fetchProducts'
 import fetchShopify from './fetchShopify'
 import { fetchCollectionByHandleQuery } from './graphql/fetchCollectionByHandleQuery'
 
 const fetchCollectionByHandle = async (handle: string) => {
-  let collection: any = null
+  let data
+  let collection
   let collectionProducts: any = []
   let lastProductCursor = null
   let hasNextPage = false
 
   do {
-    const data: any = await fetchShopify(fetchCollectionByHandleQuery, { handle: handle, cursor: lastProductCursor })
+    data = await fetchShopify(fetchCollectionByHandleQuery, { handle: handle, cursor: lastProductCursor })
 
     if (!data.collectionByHandle) return null
 
@@ -30,8 +33,25 @@ const fetchCollectionByHandle = async (handle: string) => {
   }
 
   collection.products.edges = collectionProducts
-
   collection = mapCollection(collection)
+
+  const productsWithRelated = await Promise.all(
+    collection.products.map(async (product: any) => {
+      let relatedProducts
+
+      if (product.tags) {
+        const relatedTag = product.tags.find((tag: string) => tag.startsWith('related'))
+        relatedProducts = await fetchProducts('tag:' + relatedTag)
+      }
+
+      return {
+        ...product,
+        relatedProducts
+      }
+    })
+  )
+
+  collection.products = productsWithRelated
 
   return { ...collection }
 }

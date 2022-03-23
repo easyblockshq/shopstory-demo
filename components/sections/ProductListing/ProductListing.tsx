@@ -8,6 +8,8 @@ import { Modal } from '../../common/Modal/Modal'
 import { Button } from '../../common/Button/Button'
 import { filterCollection, getCollectionColor } from '../../../data/shopify/filterCollection'
 import { Appearance } from '../../common/StyledClickable/StyledClickable'
+import CloseIcon from '../../icons/CloseIcon'
+import type { ParsedUrlQuery } from 'querystring'
 
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0
@@ -66,12 +68,6 @@ const ProductListing: FC<PLPProps> = (props) => {
     onChange(newFilters)
   }
 
-  // console.log('xxxxx01')
-  // console.log(values)
-  // console.log(activeFilters)
-  // console.log(fullHandle)
-  // console.log(activeFiltersCount)
-
   const [isFilterModalOpen, setFilterModalOpen] = useState<boolean>(false)
   const toggleFilterModal = () => {
     setFilterModalOpen(!isFilterModalOpen)
@@ -124,7 +120,9 @@ const ProductListing: FC<PLPProps> = (props) => {
         <div className={`ReactModal__Animation--right ${styles.filters}`}>
           <div className={styles.modalHeader}>
             <span className={styles.modalHeading}>Filter</span>
-            <Button onClick={toggleFilterModal}>Close</Button>
+            <Button onClick={toggleFilterModal}>
+              <CloseIcon />
+            </Button>
           </div>
           <div className={styles.modalContent}>
             {props.filters.map((filter: CollectionFilter, i: number) => {

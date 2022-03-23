@@ -1,11 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useMemo } from 'react'
-import ProductListing from '../../components/sections/ProductListing'
+import ProductListing from '../../components/sections/ProductListing/ProductListing'
 import fetchAllCollectionHandles from '../../data/shopify/fetchAllCollectionHandles'
 import fetchCollectionByHandle from '../../data/shopify/fetchCollectionByHandle'
 import { filterCollection } from '../../data/shopify/filterCollection'
-import { PLPProps } from '../../types'
+import { Path, PLPProps } from '../../types'
 import { decomposeHandle } from '../../utils/collectionsHandle'
 import { decodeCollectionProps, encodeCollectionProps } from '../../utils/encodeCollectionProps'
 
@@ -22,7 +22,7 @@ const Page: NextPage<PLPProps> = (props) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths: any[] = []
+  let paths: Path[] = []
 
   if (process.env.IS_VERCEL_PREVIEW !== 'true') {
     const handles = await fetchAllCollectionHandles()

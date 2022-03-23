@@ -1,4 +1,5 @@
 import { mapProduct } from '../../utils/mapProduct'
+import fetchProducts from './fetchProducts'
 import fetchShopify from './fetchShopify'
 import { fetchProductByHandleQuery } from './graphql/fetchProductQuery'
 
@@ -15,7 +16,10 @@ const fetchProductByHandle = async (handle: string) => {
 
   product = mapProduct(product)
 
-  return { ...product }
+  const relatedTag = product.tags.find((tag: any) => tag.startsWith('related'))
+  const relatedProducts = await fetchProducts('tag:' + relatedTag)
+
+  return { ...product, relatedProducts }
 }
 
 export default fetchProductByHandle

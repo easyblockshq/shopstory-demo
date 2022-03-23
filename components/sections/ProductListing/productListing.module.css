@@ -8,6 +8,7 @@
 .header {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-column-gap: var(--size_07);
   @mixin container-standard;
   padding-top: var(--size_10);
   padding-bottom: var(--size_10);
@@ -22,10 +23,14 @@
 }
 
 .filtersContainer {
-  padding-top: var(--size_10);
+  padding-top: var(--size_09);
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+
+  @media (--md) {
+    padding-top: var(--size_10);
+  }
 }
 
 .counter {
