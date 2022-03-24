@@ -1,6 +1,6 @@
 import styles from './productListing.module.css'
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { CollectionFilter, CollectionFilterOption, FilterButtonType, PLPProps } from '../../../types'
+import { CollectionFilter, CollectionFilterOption, FilterButtonType, PLPProps, URLValues } from '../../../types'
 import ProductCard from '../../common/ProductCard/ProductCard'
 import Router, { useRouter } from 'next/router'
 import { buildHandle, decomposeHandle } from '../../../utils/collectionsHandle'
@@ -24,16 +24,35 @@ const getActiveFiltersCount = (activeFilters: any) => {
 
 const ProductListing: FC<PLPProps> = (props) => {
   const router = useRouter()
-  const query: any = router.query
+  const { query } = router
   const isFirstRender = useRef(true)
 
-  const { handle, values } = decomposeHandle(query.handle)
+  const { handle, values } =
+    query.handle && typeof query.handle == 'string' ? decomposeHandle(query.handle) : { handle: null, values: null }
 
   const fullHandle = buildHandle(handle, values)
 
   const [activeFilters, setActiveFilters] = useState(values ?? {})
   const [collection, setCollection] = useState(props.collection)
   const [pagination, setPagination] = useState(props.pagination)
+  const [isFilterModalOpen, setFilterModalOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    const result = filterCollection(props.fullCollection, { ...values })
+    setTimeout(() => {
+      setCollection(result.collection)
+      setPagination(result.pagination)
+      setActiveFilters(result.options)
+    }, 100)
+  }, [fullHandle]) // if query string changed, let's reload
+
+  if (!handle && !values) {
+    return null
+  }
 
   const activeFiltersCount = getActiveFiltersCount(activeFilters)
 
@@ -45,14 +64,14 @@ const ProductListing: FC<PLPProps> = (props) => {
     })
   }
 
-  const toggleFilter = (id: string, optionId: string, type: FilterButtonType) => {
+  const toggleFilter = (id: keyof URLValues, optionId: string, type: FilterButtonType) => {
     let newFilters = values
 
-    if (type === 'select') {
+    if (type === 'select' && (id === 'room' || id === 'material')) {
       newFilters[id] = [optionId]
     }
 
-    if (type === 'multiselect' || type === 'colorselect') {
+    if ((type === 'multiselect' || type === 'colorselect') && (id === 'room' || id === 'material')) {
       if (!newFilters[id]) {
         newFilters[id] = []
       }
@@ -67,23 +86,19 @@ const ProductListing: FC<PLPProps> = (props) => {
     onChange(newFilters)
   }
 
-  const [isFilterModalOpen, setFilterModalOpen] = useState<boolean>(false)
   const toggleFilterModal = () => {
     setFilterModalOpen(!isFilterModalOpen)
   }
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-    const result = filterCollection(props.fullCollection, { ...values })
-    setTimeout(() => {
-      setCollection(result.collection)
-      setPagination(result.pagination)
-      setActiveFilters(result.options)
-    }, 100)
-  }, [fullHandle]) // if query string changed, let's reload
+  const isFilterButtonActive = (filter: CollectionFilter, optionId: string, index: number) => {
+    const filterValue = values[filter.id]
+
+    return Array.isArray(filterValue) && filterValue.includes(optionId)
+      ? true
+      : !filterValue && filter.type === 'select' && index === 0 //select the first item if empty
+      ? true
+      : false
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -155,13 +170,7 @@ const ProductListing: FC<PLPProps> = (props) => {
                             toggleFilter(filter.id, option.id, filter.type)
                           }}
                           appearance={buttonAppearance}
-                          active={
-                            values[filter.id] && values[filter.id].includes(option.id)
-                              ? true
-                              : !values[filter.id] && filter.type === 'select' && j === 0 //select the first item if empty
-                              ? true
-                              : false
-                          }
+                          active={isFilterButtonActive(filter, option.id, j)}
                         >
                           {filter.type === 'colorselect' && (
                             <span

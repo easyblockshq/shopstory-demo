@@ -1,5 +1,5 @@
 import styles from './styledClickable.module.css'
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { ButtonProps } from '../Button/Button'
 import { LinkObjProps } from '../Link/Link'
 
@@ -87,7 +87,7 @@ export type StyledClickableProps = {
   appearance?: Appearance
   active?: boolean
   tabIndex?: number
-  children: any
+  children: ReactNode
   additionalClass?: string
   onMouseEnter?: () => void
   onMouseLeave?: () => void

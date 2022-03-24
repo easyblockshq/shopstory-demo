@@ -61,10 +61,17 @@ export type CollectionFilterOption = {
 export type FilterButtonType = 'select' | 'multiselect' | 'colorselect'
 
 export type CollectionFilter = {
-  id: string
+  id: keyof URLValues
   label: string
   type: FilterButtonType
   options: CollectionFilterOption[]
+}
+
+export type URLValues = {
+  sort: string
+  material: string[]
+  room: string[]
+  page: number
 }
 
 export type PLPProps = {

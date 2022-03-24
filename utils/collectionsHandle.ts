@@ -1,11 +1,10 @@
-type URLValues = {
-  sort: string
-  material: string[]
-  room: string[]
-  page: number
-}
+import { URLValues } from '../types'
 
-export const buildHandle = (handle: string, values: URLValues) => {
+export const buildHandle = (handle: string | null, values: URLValues | null) => {
+  if (!handle || !values) {
+    return null
+  }
+
   let ret = handle
 
   if (values.sort) {
@@ -37,24 +36,33 @@ export const decomposeHandle = (fullHandle: string) => {
 
   let handle = things[0]
 
-  const values: any = {}
-
-  for (let i = 1; i < things.length; i++) {
-    const parts = things[i].split('_')
+  const values = things.reduce<URLValues>((acc, thing) => {
+    const parts = thing.split('_')
     const key = parts[0]
 
-    let val
-
     if (key === 'sort') {
-      val = parts[1]
-    } else if (key === 'page') {
-      val = parseInt(parts[1])
-    } else {
-      val = parts.slice(1)
+      return {
+        ...acc,
+        [key]: parts[1]
+      }
     }
 
-    values[key] = val
-  }
+    if (key === 'page') {
+      return {
+        ...acc,
+        [key]: parseInt(parts[1])
+      }
+    }
+
+    if (key === 'room' || key === 'material') {
+      return {
+        ...acc,
+        [key]: parts.slice(1)
+      }
+    }
+
+    return acc
+  }, <URLValues>{})
 
   if (!values.page) {
     values.page = 1

@@ -38,6 +38,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { handle, values } = decomposeHandle(params.handle)
 
+  if (!handle) {
+    return {
+      notFound: true
+    }
+  }
+
   const responses = await Promise.all([fetchCollectionByHandle(handle)])
   const fullCollection = responses[0]
 
