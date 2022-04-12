@@ -1,5 +1,6 @@
 import React from 'react'
 import { RuntimeConfig, CustomComponent } from '@shopstory/core/dist/types'
+import ProductCard from "../components/common/ProductCard/ProductCard";
 
 const containerMargin = {
   '@initial': 96,
@@ -68,15 +69,19 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
-  components: [],
-
-//   @custom-media --sm (min-width: 430px);
-// @custom-media --md (min-width: 740px);
-// @custom-media --lg (min-width: 1000px);
-// @custom-media --xl (min-width: 1300px);
-// @custom-media --xxl (min-width: 1900px);
-
-
+  components: [
+    {
+      id: "ProductCard",
+      type: "card",
+      component: ProductCard,
+      schema: [
+        {
+          prop: "product",
+          type: "product",
+        }
+      ]
+    }
+  ],
 
 devices: [
     {

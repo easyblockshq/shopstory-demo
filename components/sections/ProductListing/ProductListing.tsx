@@ -121,7 +121,7 @@ const ProductListing: FC<PLPProps> = (props) => {
       <div className={styles.productGrid}>
         {collection &&
           collection.products.length > 0 &&
-          collection.products.map((product, i) => <ProductCard {...product} key={i} />)}
+          collection.products.map((product, i) => <ProductCard product={product} key={i} />)}
       </div>
 
       <Modal

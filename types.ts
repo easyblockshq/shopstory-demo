@@ -18,6 +18,7 @@ export type ShopifyProductRoom = {
 }
 
 export type ShopifyProduct = {
+  id: string
   title: string
   handle: string
   descriptionHtml: string

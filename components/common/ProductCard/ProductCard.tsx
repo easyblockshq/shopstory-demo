@@ -6,7 +6,7 @@ import { Link } from '../Link/Link'
 import { Media } from '../Media/Media'
 import styles from './productCard.module.css'
 
-const ProductCard: FC<ShopifyProduct> = (product) => {
+const ProductCard: FC<{ product: ShopifyProduct }> = ({  product }) => {
   return (
     <div className={styles.wrapper}>
       <Link href={'/products/' + product.handle}>
