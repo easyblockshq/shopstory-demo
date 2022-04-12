@@ -16,20 +16,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     setAppElement('#modalContainer')
   }, [])
 
+  const pageContent = <>
+    {router.isFallback && <LoaderSection />}
+    {!router.isFallback && <Component {...pageProps} />}
+  </>
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Header />
 
-      {router.isFallback && <LoaderSection />}
-      {!router.isFallback && <Component {...pageProps} />}
+      { !pageProps.noHeaderAndFooter && <>
+        <Header />
+        { pageContent }
+        <Footer />
+      </>}
 
-      <Footer />
+      { pageProps.noHeaderAndFooter && pageContent }
+
       <div id={'modalContainer'} />
     </>
   )
 }
 
-export default MyApp
+export default MyApp;

@@ -1,9 +1,9 @@
 /* Breakpoints */
-@custom-media --sm (min-width: 430px);
+@custom-media --sm (min-width: 480px);
 @custom-media --md (min-width: 740px);
-@custom-media --lg (min-width: 1000px);
-@custom-media --xl (min-width: 1300px);
-@custom-media --xxl (min-width: 1900px);
+@custom-media --lg (min-width: 1024px);
+@custom-media --xl (min-width: 1280px);
+@custom-media --xxl (min-width: 1920px);
 
 :root {
   /* Colors */
@@ -38,13 +38,30 @@
   --container_02: 360px;
 
   /* Others */
-  --containerMargin: 5vw;
   --headerHeight: 82px;
   --headerHeightMobile: 60px;
+
+  --containerMargin: 24px;
+
+  @media (--sm) {
+    --containerMargin: 24px;
+  }
+  @media (--md) {
+    --containerMargin: 40px;
+  }
+  @media (--lg) {
+    --containerMargin: 50px;
+  }
+  @media (--xl) {
+    --containerMargin: 70px;
+  }
+  @media (--xxl) {
+    --containerMargin: 96px;
+  }
 }
 
-/* Typography */
 
+/* Typography */
 @define-mixin typography-national {
   font-family: 'test-national-2';
 }
