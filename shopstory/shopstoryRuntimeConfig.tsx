@@ -1,6 +1,6 @@
 import React from 'react'
 import { RuntimeConfig, CustomComponent } from '@shopstory/core/dist/types'
-import ProductCard from "../components/common/ProductCard/ProductCard";
+import ProductCard from '../components/common/ProductCard/ProductCard'
 
 const containerMargin = {
   '@initial': 96,
@@ -71,19 +71,19 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
 
   components: [
     {
-      id: "ProductCard",
-      type: "card",
+      id: 'ProductCard',
+      type: 'card',
       component: ProductCard,
       schema: [
         {
-          prop: "product",
-          type: "product",
+          prop: 'product',
+          type: 'product'
         }
       ]
     }
   ],
 
-devices: [
+  devices: [
     {
       breakpoint: 480,
       h: 667,
@@ -108,12 +108,12 @@ devices: [
       // hidden: true
     },
     {
-        id: "lg",
-        w: 1024,
-        h: 768,
-        breakpoint: 1280,
-        label: "TabletH",
-        hidden: true
+      id: 'lg',
+      w: 1024,
+      h: 768,
+      breakpoint: 1280,
+      label: 'TabletH',
+      hidden: true
     },
     {
       breakpoint: 1680,
@@ -134,54 +134,53 @@ devices: [
   ],
 
   /* Fonts */
-//   @define-mixin font-body01 {
-// @mixin typography-soehne-mono;
-//   font-size: 20px;
-// }
-//
-// @define-mixin font-body02 {
-// @mixin typography-soehne-mono;
-//   font-size: 13px;
-//   line-height: 1.8;
-// }
-//
-// @define-mixin font-heading01 {
-// @mixin typography-national;
-//   font-size: 21px;
-//   line-height: 1.4;
-//   font-weight: 600;
-// }
-//
-// @define-mixin font-heading02 {
-// @mixin typography-national;
-//   font-size: 16px;
-//   font-weight: 600;
-// }
-//
-// @define-mixin font-heading03 {
-// @mixin typography-national;
-//   font-size: 13px;
-//   line-height: 1.4;
-//   font-weight: 600;
-// }
-//
-// @define-mixin font-heading04 {
-// @mixin typography-national;
-//   font-size: 24px;
-//   line-height: 1.2;
-//   font-weight: 700;
-//
-//   /* TODO: @media (--md) doesn't work in this file. Why?? */
-// @media (min-width: 740px) {
-//     font-size: 36px;
-//   }
-// }
-
+  //   @define-mixin font-body01 {
+  // @mixin typography-soehne-mono;
+  //   font-size: 20px;
+  // }
+  //
+  // @define-mixin font-body02 {
+  // @mixin typography-soehne-mono;
+  //   font-size: 13px;
+  //   line-height: 1.8;
+  // }
+  //
+  // @define-mixin font-heading01 {
+  // @mixin typography-national;
+  //   font-size: 21px;
+  //   line-height: 1.4;
+  //   font-weight: 600;
+  // }
+  //
+  // @define-mixin font-heading02 {
+  // @mixin typography-national;
+  //   font-size: 16px;
+  //   font-weight: 600;
+  // }
+  //
+  // @define-mixin font-heading03 {
+  // @mixin typography-national;
+  //   font-size: 13px;
+  //   line-height: 1.4;
+  //   font-weight: 600;
+  // }
+  //
+  // @define-mixin font-heading04 {
+  // @mixin typography-national;
+  //   font-size: 24px;
+  //   line-height: 1.2;
+  //   font-weight: 700;
+  //
+  //   /* TODO: @media (--md) doesn't work in this file. Why?? */
+  // @media (min-width: 740px) {
+  //     font-size: 36px;
+  //   }
+  // }
 
   fonts: [
     {
-      id: "body",
-      label: "body",
+      id: 'body',
+      label: 'body',
       value: {
         fontSize: 20,
         lineHeight: 1.8,
@@ -189,8 +188,8 @@ devices: [
       }
     },
     {
-      id: "body-small",
-      label: "body small",
+      id: 'body-small',
+      label: 'body small',
       value: {
         fontSize: 13,
         lineHeight: 1.8,
@@ -198,8 +197,8 @@ devices: [
       }
     },
     {
-      id: "heading1",
-      label: "heading1",
+      id: 'heading1',
+      label: 'heading1',
       value: {
         fontFamily: 'test-national-2',
         fontSize: 21,
@@ -208,8 +207,8 @@ devices: [
       }
     },
     {
-      id: "heading2",
-      label: "heading2",
+      id: 'heading2',
+      label: 'heading2',
       value: {
         fontFamily: 'test-national-2',
         fontSize: 16,
@@ -218,8 +217,8 @@ devices: [
       }
     },
     {
-      id: "heading3",
-      label: "heading3",
+      id: 'heading3',
+      label: 'heading3',
       value: {
         fontFamily: 'test-national-2',
         fontSize: 13,
@@ -228,18 +227,18 @@ devices: [
       }
     },
     {
-      id: "heading4",
-      label: "heading4",
+      id: 'heading4',
+      label: 'heading4',
       value: {
         fontFamily: 'test-national-2',
         fontSize: 36,
         lineHeight: 1.2,
         fontWeight: 700,
-        "@sm": {
+        '@sm': {
           fontSize: 24
         }
       }
-    },
+    }
   ],
   links: [
     // {

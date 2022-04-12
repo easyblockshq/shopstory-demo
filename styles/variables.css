@@ -60,7 +60,6 @@
   }
 }
 
-
 /* Typography */
 @define-mixin typography-national {
   font-family: 'test-national-2';

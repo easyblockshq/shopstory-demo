@@ -14,16 +14,16 @@ const Page: NextPage<PLPProps> = (props) => {
   const newProps = useMemo(() => decodeCollectionProps(props), [props.collection])
 
   useEffect(() => {
+    console.log('hello!')
 
-    console.log('hello!');
-
-    fetchProductsByIds(['Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc1NjA2Njk1MjgyNzY=']).then(result => {
-      console.log('result', result);
-    }).catch(err => {
-      console.log('err', err);
-    })
+    fetchProductsByIds(['Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc1NjA2Njk1MjgyNzY='])
+      .then((result) => {
+        console.log('result', result)
+      })
+      .catch((err) => {
+        console.log('err', err)
+      })
     return
-
   }, [])
 
   return (
