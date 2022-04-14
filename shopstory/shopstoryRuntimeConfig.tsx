@@ -29,7 +29,12 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     // }
   ],
 
-  aspectRatios: [],
+  aspectRatios: [
+    {
+      id: '$gridMainObjectDefault',
+      value: '10:7'
+    }
+  ],
 
   colors: [
     {

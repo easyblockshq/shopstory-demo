@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { createClient, Entry } from 'contentful'
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import compile from '@shopstory/core/dist/client/compile'
 import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
 import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
@@ -10,6 +9,7 @@ import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulPa
 import { CompilationOutput } from '@shopstory/core/dist/client/types'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
+import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
 
 type LandingPageProps = {
   shopstoryCompiledContent: CompilationOutput
@@ -35,47 +35,24 @@ export const getStaticPaths: GetStaticPaths = () => {
 }
 
 export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> = async (context) => {
-  let { params, preview, previewData } = context
-
-  const client = createClient({
-    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-    accessToken: preview
-      ? process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN
-      : process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-    host: preview ? 'preview.contentful.com' : undefined
-  })
+  let { params, preview, locale = 'en-US' } = context
 
   if (!params) {
     return { notFound: true }
   }
 
-  let entry: Entry<any>
-
-  try {
-    const response = await client.getEntries({
-      limit: 1,
-      include: 2,
-      content_type: 'landingPage',
-      'fields.slug': params.slug
-    })
-
-    entry = response.items[0]
-  } catch (err) {
-    return { notFound: true }
-  }
+  const entry = await fetchLandingPageEntry(params.slug, { preview: preview ?? true, locale })
 
   if (!entry) {
     return { notFound: true }
   }
 
-  const config = entry.fields.shopstory
-
   const shopstoryCompiledContent = await compile(
-    config,
+    entry.fields.shopstory,
     shopstoryCompilationConfig,
     contentfulCompilationSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
     {
-      locale: 'en-US'
+      locale
     }
   )
 

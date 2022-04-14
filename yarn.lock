@@ -514,10 +514,10 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.0.tgz"
   "version" "1.1.0"
 
-"@shopstory/core@^0.4.0-alpha.18":
-  "integrity" "sha512-7+egqUEHcVIgys1LrsKRdYS7jOkAoVwvOJ3FK0+//r+YJu5ZOyy6kFksNt2kGUi2AAOxicQHpG3fwUSZxfpCxg=="
-  "resolved" "https://registry.npmjs.org/@shopstory/core/-/core-0.4.0-alpha.18.tgz"
-  "version" "0.4.0-alpha.18"
+"@shopstory/core@^0.4.0-alpha.19":
+  "integrity" "sha512-1cQkcYdzso0Xt9g0AgL7PxFVoTX8kjPsNinV1zBqKLvAuSXExWoaeqVyOW6iaGCJdK/l9zqpSuq8vB9VYMwCwA=="
+  "resolved" "https://registry.npmjs.org/@shopstory/core/-/core-0.4.0-alpha.19.tgz"
+  "version" "0.4.0-alpha.19"
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@contentful/app-sdk" "^4.3.0"
