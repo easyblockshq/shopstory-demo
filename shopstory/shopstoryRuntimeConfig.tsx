@@ -133,50 +133,6 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
-  /* Fonts */
-  //   @define-mixin font-body01 {
-  // @mixin typography-soehne-mono;
-  //   font-size: 20px;
-  // }
-  //
-  // @define-mixin font-body02 {
-  // @mixin typography-soehne-mono;
-  //   font-size: 13px;
-  //   line-height: 1.8;
-  // }
-  //
-  // @define-mixin font-heading01 {
-  // @mixin typography-national;
-  //   font-size: 21px;
-  //   line-height: 1.4;
-  //   font-weight: 600;
-  // }
-  //
-  // @define-mixin font-heading02 {
-  // @mixin typography-national;
-  //   font-size: 16px;
-  //   font-weight: 600;
-  // }
-  //
-  // @define-mixin font-heading03 {
-  // @mixin typography-national;
-  //   font-size: 13px;
-  //   line-height: 1.4;
-  //   font-weight: 600;
-  // }
-  //
-  // @define-mixin font-heading04 {
-  // @mixin typography-national;
-  //   font-size: 24px;
-  //   line-height: 1.2;
-  //   font-weight: 700;
-  //
-  //   /* TODO: @media (--md) doesn't work in this file. Why?? */
-  // @media (min-width: 740px) {
-  //     font-size: 36px;
-  //   }
-  // }
-
   fonts: [
     {
       id: 'body',
