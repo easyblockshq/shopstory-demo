@@ -7,7 +7,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Demo store.</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <SectionWelcome />
