@@ -22,15 +22,8 @@ const Page: NextPage<PLPProps> = (props) => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  let paths: Path[] = []
-
-  if (process.env.IS_VERCEL_PREVIEW !== 'true') {
-    const handles = await fetchAllCollectionHandles()
-    paths = handles.map((h) => ({ params: h }))
-  }
-
-  return { paths, fallback: true }
+export const getStaticPaths: GetStaticPaths = () => {
+  return { paths: [], fallback: 'blocking' }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
