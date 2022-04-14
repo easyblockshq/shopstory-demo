@@ -37,8 +37,6 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> = async (context) => {
   let { params, preview, previewData } = context
 
-  preview = true
-
   const client = createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
     accessToken: preview
