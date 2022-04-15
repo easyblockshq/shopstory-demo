@@ -220,24 +220,17 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     //   ]
     // }
   ],
+
   mainGrid: {
-    containerMargin: containerMargin,
-    horizontalGap: {
-      '@initial': 24,
-      '@md': 8,
-      '@xl': 16
-    },
+    containerMargin: 0,
+    horizontalGap: 1,
     numberOfItemsInRow: {
-      '@initial': '4',
-      '@md': '3',
-      '@xs': '2'
+      '@initial': '3',
+      '@sm': '2'
     },
-    verticalGap: {
-      '@initial': 24 + 40,
-      '@md': 8 + 40,
-      '@xl': 16 + 40
-    }
+    verticalGap: 24
   },
+
   space: [
     {
       id: 'containerMargin.default',

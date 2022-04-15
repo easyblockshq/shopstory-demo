@@ -1,6 +1,12 @@
 import styles from './productListing.module.css'
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { CollectionFilter, CollectionFilterOption, FilterButtonType, PLPProps, URLValues } from '../../../types'
+import {
+  CollectionFilter,
+  CollectionFilterOption,
+  CollectionFilterButtonType,
+  PLPProps,
+  CollectionFilterValues
+} from '../../../types'
 import ProductCard from '../../common/ProductCard/ProductCard'
 import Router, { useRouter } from 'next/router'
 import { buildHandle, decomposeHandle } from '../../../utils/collectionsHandle'
@@ -9,6 +15,8 @@ import { Button } from '../../common/Button/Button'
 import { filterCollection, getCollectionColor } from '../../../data/shopify/filterCollection'
 import { Appearance } from '../../common/StyledClickable/StyledClickable'
 import CloseIcon from '../../icons/CloseIcon'
+import { shopstoryRuntimeConfig } from '../../../shopstory/shopstoryRuntimeConfig'
+import { ShopstoryGrid } from '@shopstory/core/dist/client/Shopstory'
 
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0
@@ -64,7 +72,7 @@ const ProductListing: FC<PLPProps> = (props) => {
     })
   }
 
-  const toggleFilter = (id: keyof URLValues, optionId: string, type: FilterButtonType) => {
+  const toggleFilter = (id: keyof CollectionFilterValues, optionId: string, type: CollectionFilterButtonType) => {
     let newFilters = values
 
     if (type === 'select' && (id === 'room' || id === 'material')) {
@@ -100,6 +108,10 @@ const ProductListing: FC<PLPProps> = (props) => {
       : false
   }
 
+  const productCards = collection
+    ? collection.products.map((product, i) => <ProductCard product={product} key={i} />)
+    : []
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -118,10 +130,13 @@ const ProductListing: FC<PLPProps> = (props) => {
           </Button>
         </div>
       </div>
+
       <div className={styles.productGrid}>
-        {collection &&
-          collection.products.length > 0 &&
-          collection.products.map((product, i) => <ProductCard product={product} key={i} />)}
+        <ShopstoryGrid
+          runtimeConfig={shopstoryRuntimeConfig}
+          cards={productCards}
+          src={props.shopstoryCompiledContent}
+        />
       </div>
 
       <Modal

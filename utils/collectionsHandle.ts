@@ -1,6 +1,6 @@
-import { URLValues } from '../types'
+import { CollectionFilterValues } from '../types'
 
-export const buildHandle = (handle: string | null, values: URLValues | null) => {
+export const buildHandle = (handle: string | null, values: CollectionFilterValues | null) => {
   if (!handle || !values) {
     return null
   }
@@ -31,12 +31,12 @@ export const buildHandle = (handle: string | null, values: URLValues | null) => 
   return ret
 }
 
-export const decomposeHandle = (fullHandle: string) => {
+export const decomposeHandle = (fullHandle: string): { handle: string; values: CollectionFilterValues } => {
   const things = fullHandle.split('__')
 
   let handle = things[0]
 
-  const values = things.reduce<URLValues>((acc, thing) => {
+  const values = things.reduce<CollectionFilterValues>((acc, thing) => {
     const parts = thing.split('_')
     const key = parts[0]
 
@@ -62,7 +62,7 @@ export const decomposeHandle = (fullHandle: string) => {
     }
 
     return acc
-  }, <URLValues>{})
+  }, <CollectionFilterValues>{})
 
   if (!values.page) {
     values.page = 1

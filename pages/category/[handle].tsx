@@ -1,23 +1,24 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import { useMemo } from 'react'
 import ProductListing from '../../components/sections/ProductListing/ProductListing'
-import fetchAllCollectionHandles from '../../data/shopify/fetchAllCollectionHandles'
 import fetchCollectionByHandle from '../../data/shopify/fetchCollectionByHandle'
 import { filterCollection } from '../../data/shopify/filterCollection'
-import { Path, PLPProps } from '../../types'
+import { PLPProps } from '../../types'
 import { decomposeHandle } from '../../utils/collectionsHandle'
-import { decodeCollectionProps, encodeCollectionProps } from '../../utils/encodeCollectionProps'
+import { fetchCollectionEntry } from '../../data/contentful/fetchCollectionEntry'
+
+import compile from '@shopstory/core/dist/client/compile'
+import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
+import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
+import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 
 const Page: NextPage<PLPProps> = (props) => {
-  const newProps = useMemo(() => decodeCollectionProps(props), [props.collection])
-
   return (
     <>
       <Head>
         <title>{props.collection.title}</title>
       </Head>
-      <ProductListing {...newProps} key={props.collection.handle} />
+      <ProductListing {...props} key={props.collection.handle} />
     </>
   )
 }
@@ -26,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   return { paths: [], fallback: 'blocking' }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PLPProps> = async ({ params, preview, locale }) => {
   if (!params?.handle) throw new Error('Catch all accessed without given [handle]')
   if (typeof params.handle !== 'string') throw new Error('Catch all accessed with wrong type of [handle]')
 
@@ -47,13 +48,30 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  const { filters, collection, pagination, numberOfItems } = filterCollection(fullCollection, values)
+  const collectionEntry = await fetchCollectionEntry(handle, { locale, preview: !!preview })
 
-  const newProps = encodeCollectionProps({ collection, filters, pagination, fullCollection, numberOfItems })
+  const shopstoryCompiledContent = await compile(
+    collectionEntry?.fields.shopstory,
+    {
+      ...shopstoryCompilationConfig,
+      mode: 'grid'
+    },
+    contentfulCompilationSetup(shopstoryContentfulParams),
+    {
+      locale: locale ?? 'en-US'
+    }
+  )
+
+  const { filters, collection, pagination, numberOfItems } = filterCollection(fullCollection, values)
 
   return {
     props: {
-      ...newProps
+      fullCollection,
+      collection,
+      filters,
+      pagination,
+      numberOfItems,
+      shopstoryCompiledContent
     },
     revalidate: 60
   }

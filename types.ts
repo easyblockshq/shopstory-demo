@@ -1,3 +1,5 @@
+import { CompilationOutput } from '@shopstory/core/dist/client/types'
+
 export type Path = {
   params: {
     handle: string[]
@@ -59,20 +61,20 @@ export type CollectionFilterOption = {
   label: string
 }
 
-export type FilterButtonType = 'select' | 'multiselect' | 'colorselect'
+export type CollectionFilterButtonType = 'select' | 'multiselect' | 'colorselect'
 
-export type CollectionFilter = {
-  id: keyof URLValues
-  label: string
-  type: FilterButtonType
-  options: CollectionFilterOption[]
-}
-
-export type URLValues = {
+export type CollectionFilterValues = {
   sort: string
   material: string[]
   room: string[]
   page: number
+}
+
+export type CollectionFilter = {
+  id: keyof CollectionFilterValues
+  label: string
+  type: CollectionFilterButtonType
+  options: CollectionFilterOption[]
 }
 
 export type PLPProps = {
@@ -84,6 +86,7 @@ export type PLPProps = {
     max: number
   }
   numberOfItems: number
+  shopstoryCompiledContent: CompilationOutput
 }
 
 export type ImageObject = {
