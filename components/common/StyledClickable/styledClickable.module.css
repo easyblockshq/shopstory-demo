@@ -8,7 +8,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   text-align: center;
   line-height: 1;
 }
@@ -23,7 +22,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   text-align: center;
   line-height: 1;
 }
@@ -38,7 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   text-align: center;
   line-height: 1;
 }
@@ -53,7 +50,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   text-align: center;
   border: 2px solid var(--color_black_01);
   line-height: 1;
@@ -113,7 +109,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   text-align: center;
   border: 1px solid var(--color_white_01);
   transition: color, border-color 0.2s;
