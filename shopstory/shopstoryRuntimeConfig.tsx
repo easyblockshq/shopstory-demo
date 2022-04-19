@@ -13,7 +13,7 @@ const containerMargin = {
   '@xs': 24
 }
 
-const ShopstoryButton = React.forwardRef(({ label, ...restProps }, ref) => {
+const ShopstoryButton = React.forwardRef(({ label, ...restProps }: any, ref) => {
   return <Button {...restProps}>{label}</Button>
 })
 

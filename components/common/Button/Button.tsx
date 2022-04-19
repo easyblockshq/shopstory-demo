@@ -10,7 +10,7 @@ export type ButtonProps = StyledClickableProps & {
 export const Button: FC<ButtonProps> = React.forwardRef(
   ({ children, disabled, type, active = true, as = 'button', ...restProps }, ref) => {
     return (
-      <StyledClickable as={as} active={active} disabled={disabled} type={type} {...restProps} ref={ref}>
+      <StyledClickable as={as} active={active} disabled={disabled} type={type} ref={ref} {...restProps}>
         {children}
       </StyledClickable>
     )
