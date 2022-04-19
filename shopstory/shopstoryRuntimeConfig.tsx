@@ -235,7 +235,8 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       schema: [
         {
           prop: 'pagePath',
-          type: 'string'
+          type: 'string',
+          defaultValue: '/'
         }
       ]
     }
