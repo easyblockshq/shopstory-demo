@@ -7,10 +7,12 @@ export type ButtonProps = StyledClickableProps & {
   active?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({ children, disabled, type, active = true, as = 'button', ...restProps }) => {
-  return (
-    <StyledClickable as={as} active={active} disabled={disabled} type={type} {...restProps}>
-      {children}
-    </StyledClickable>
-  )
-}
+export const Button: FC<ButtonProps> = React.forwardRef(
+  ({ children, disabled, type, active = true, as = 'button', ...restProps }, ref) => {
+    return (
+      <StyledClickable as={as} active={active} disabled={disabled} type={type} {...restProps} ref={ref}>
+        {children}
+      </StyledClickable>
+    )
+  }
+)

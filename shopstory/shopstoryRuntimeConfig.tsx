@@ -2,6 +2,7 @@ import React from 'react'
 import { RuntimeConfig, CustomComponent } from '@shopstory/core/dist/types'
 import ProductCard from '../components/common/ProductCard/ProductCard'
 import { Button } from '../components/common/Button/Button'
+import Link from 'next/link'
 
 const containerMargin = {
   '@initial': 96,
@@ -12,9 +13,16 @@ const containerMargin = {
   '@xs': 24
 }
 
-function ShopstoryButton(props: any) {
-  const { label, ...restProps } = props
+const ShopstoryButton = React.forwardRef(({ label, ...restProps }, ref) => {
   return <Button {...restProps}>{label}</Button>
+})
+
+function NextLinkProvider({ Component, componentProps, values }: any) {
+  return (
+    <Link href={values.pagePath} passHref={true}>
+      <Component {...componentProps} />
+    </Link>
+  )
 }
 
 const shopstoryRuntimeConfig: RuntimeConfig = {
@@ -220,23 +228,17 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
   links: [
-    // {
-    //   id: 'MyLink',
-    //   label: 'URL Route',
-    //   linkProvider: URLRouteLinkProvider,
-    //   schema: [
-    //     {
-    //       contentTypeId: 'UrlRoute',
-    //       mapper: (link: any) => {
-    //         return {
-    //           path: link.fields.path
-    //         };
-    //       },
-    //       prop: 'link',
-    //       type: 'contentful-entry'
-    //     }
-    //   ]
-    // }
+    {
+      id: 'MyLink',
+      label: 'URL Route',
+      linkProvider: NextLinkProvider,
+      schema: [
+        {
+          prop: 'pagePath',
+          type: 'string'
+        }
+      ]
+    }
   ],
 
   mainGrid: {
