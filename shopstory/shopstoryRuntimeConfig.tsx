@@ -1,6 +1,7 @@
 import React from 'react'
 import { RuntimeConfig, CustomComponent } from '@shopstory/core/dist/types'
 import ProductCard from '../components/common/ProductCard/ProductCard'
+import { Button } from '../components/common/Button/Button'
 
 const containerMargin = {
   '@initial': 96,
@@ -9,6 +10,11 @@ const containerMargin = {
   '@md': 40,
   '@sm': 24,
   '@xs': 24
+}
+
+function ShopstoryButton(props: any) {
+  const { label, ...restProps } = props
+  return <Button {...restProps}>{label}</Button>
 }
 
 const shopstoryRuntimeConfig: RuntimeConfig = {
@@ -83,6 +89,18 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         {
           prop: 'product',
           type: 'product'
+        }
+      ]
+    },
+    {
+      id: 'Button',
+      type: 'button',
+      component: ShopstoryButton,
+      schema: [
+        {
+          prop: 'appearance',
+          type: 'select',
+          options: ['solidBlack', 'solidGrey', 'solidWhite', 'outlineBlack']
         }
       ]
     }

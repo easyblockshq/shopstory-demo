@@ -7,9 +7,9 @@ export type ButtonProps = StyledClickableProps & {
   active?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({ children, disabled, type, active = true, ...restProps }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, type, active = true, as = 'button', ...restProps }) => {
   return (
-    <StyledClickable as={'button'} active={active} disabled={disabled} type={type} {...restProps}>
+    <StyledClickable as={as} active={active} disabled={disabled} type={type} {...restProps}>
       {children}
     </StyledClickable>
   )

@@ -1,7 +1,7 @@
 .solidBlack {
   @mixin font-heading02;
-  padding-top: var(--size_06);
-  padding-bottom: var(--size_06);
+  padding: 0 var(--size_07);
+  height: 44px;
   background-color: var(--color_black_01);
   border-radius: 4px;
   color: var(--color_white_01);
@@ -10,12 +10,13 @@
   justify-content: center;
   width: 100%;
   text-align: center;
+  line-height: 1;
 }
 
 .solidWhite {
   @mixin font-heading02;
-  padding-top: var(--size_06);
-  padding-bottom: var(--size_06);
+  padding: 0 var(--size_07);
+  height: 44px;
   background-color: var(--color_white_01);
   border-radius: 4px;
   color: var(--color_black_01);
@@ -24,12 +25,13 @@
   justify-content: center;
   width: 100%;
   text-align: center;
+  line-height: 1;
 }
 
 .solidGrey {
   @mixin font-heading02;
-  padding-top: var(--size_06);
-  padding-bottom: var(--size_06);
+  padding: 0 var(--size_07);
+  height: 44px;
   background-color: rgba(249, 248, 243, 0.2);
   border-radius: 4px;
   color: var(--color_white_01);
@@ -38,12 +40,13 @@
   justify-content: center;
   width: 100%;
   text-align: center;
+  line-height: 1;
 }
 
 .outlineBlack {
   @mixin font-heading02;
-  padding-top: var(--size_06);
-  padding-bottom: var(--size_06);
+  padding: 0 var(--size_07);
+  height: 44px;
   background-color: inherit;
   border-radius: 4px;
   color: var(--color_black_01);
@@ -53,14 +56,12 @@
   width: 100%;
   text-align: center;
   border: 2px solid var(--color_black_01);
+  line-height: 1;
 }
 
 .sizeMedium {
   width: auto;
-  padding-right: var(--size_07);
-  padding-left: var(--size_07);
-  padding-top: var(--size_05);
-  padding-bottom: var(--size_05);
+  height: 36px;
 }
 
 .radioButton {
@@ -104,8 +105,8 @@
 
 .checkboxButton {
   @mixin font-heading03;
-  padding-top: var(--size_06);
-  padding-bottom: var(--size_06);
+  padding: 0 var(--size_07);
+  height: 44px;
   background-color: inherit;
   border-radius: 4px;
   color: var(--color_white_01);
