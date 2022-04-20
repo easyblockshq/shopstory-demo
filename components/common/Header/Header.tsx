@@ -1,8 +1,8 @@
 import CartIcon from '../../icons/CartIcon'
 import SearchIcon from '../../icons/SearchIcon'
 import { Button } from '../Button/Button'
-import { Link } from '../Link/Link'
 import styles from './header.module.css'
+import Link from 'next/link'
 
 const Header = () => {
   return (
@@ -22,9 +22,17 @@ const Header = () => {
       </div>
 
       <div className={styles.nav}>
-        <Link href={`/category/all`}>What’s new</Link>
-        <Link href={`/category/furniture`}>Furniture</Link>
-        <Link href={`/category/accessories`}>Accessories</Link>
+        <Link href={'/category/all'} passHref>
+          <Button as={'a'}>What’s new</Button>
+        </Link>
+
+        <Link href={'/category/furniture'} passHref>
+          <Button as={'a'}>Furniture</Button>
+        </Link>
+
+        <Link href={'/category/accessories'} passHref>
+          <Button as={'a'}>Accessories</Button>
+        </Link>
       </div>
       <div className={styles.rightContainer}>
         <Button
