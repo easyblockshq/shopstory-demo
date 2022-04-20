@@ -13,7 +13,9 @@ import { buildHandle, decomposeHandle } from '../../../utils/collectionsHandle'
 import { Modal } from '../../common/Modal/Modal'
 import { Button } from '../../common/Button/Button'
 import { filterCollection, getCollectionColor } from '../../../data/shopify/filterCollection'
-import { Appearance } from '../../common/StyledClickable/StyledClickable'
+import { ToggleButton } from '../../common/ToggleButton/ToggleButton'
+import { ToggleColorButton } from '../../common/ToggleColorButton/ToggleColorButton'
+import { ToggleRadioButton } from '../../common/ToggleRadioButton/ToggleRadioButton'
 import CloseIcon from '../../icons/CloseIcon'
 import { shopstoryRuntimeConfig } from '../../../shopstory/shopstoryRuntimeConfig'
 import { ShopstoryGrid } from '@shopstory/core/dist/client/Shopstory'
@@ -73,13 +75,11 @@ const ProductListing: FC<PLPProps> = (props) => {
   }
 
   const toggleFilter = (id: keyof CollectionFilterValues, optionId: string, type: CollectionFilterButtonType) => {
-    let newFilters = values
+    let newFilters = JSON.parse(JSON.stringify(values))
 
-    if (type === 'select' && (id === 'room' || id === 'material')) {
+    if (type === 'select') {
       newFilters[id] = [optionId]
-    }
-
-    if ((type === 'multiselect' || type === 'colorselect') && (id === 'room' || id === 'material')) {
+    } else if (type === 'multiselect' || type === 'colorselect') {
       if (!newFilters[id]) {
         newFilters[id] = []
       }
@@ -101,11 +101,15 @@ const ProductListing: FC<PLPProps> = (props) => {
   const isFilterButtonActive = (filter: CollectionFilter, optionId: string, index: number) => {
     const filterValue = values[filter.id]
 
-    return Array.isArray(filterValue) && filterValue.includes(optionId)
-      ? true
-      : !filterValue && filter.type === 'select' && index === 0 //select the first item if empty
-      ? true
-      : false
+    if (!filterValue) {
+      return false
+    }
+
+    if (Array.isArray(filterValue)) {
+      return filterValue.includes(optionId)
+    }
+
+    return filterValue === optionId
   }
 
   const productCards = collection
@@ -156,48 +160,59 @@ const ProductListing: FC<PLPProps> = (props) => {
           <div className={styles.modalContent}>
             {props.filters.map((filter: CollectionFilter, i: number) => {
               let filterBoxStyle = styles.sortBox
-              let filtersStyle = styles.filterSelect
-              let buttonAppearance: Appearance = 'radioButton'
-
-              switch (filter.type) {
-                case 'multiselect':
-                  filterBoxStyle = styles.filterBox
-                  filtersStyle = styles.filterMultiselect
-                  buttonAppearance = 'checkboxButton'
-                  break
-                case 'colorselect':
-                  filterBoxStyle = styles.filterBox
-                  filtersStyle = styles.filterColorselect
-                  buttonAppearance = 'colorButton'
-                  break
-              }
 
               return (
                 <div className={filterBoxStyle} key={i}>
                   <div className={styles.filterHeading}>{filter.label}</div>
 
-                  <div key={i} className={filtersStyle}>
-                    {filter.options.map((option: CollectionFilterOption, j: number) => {
-                      return (
-                        <Button
+                  {filter.type === 'select' && (
+                    <div key={i} className={styles.filterSelect}>
+                      {filter.options.map((option: CollectionFilterOption, j: number) => (
+                        <ToggleRadioButton
                           key={j}
                           onClick={() => {
                             toggleFilter(filter.id, option.id, filter.type)
                           }}
-                          appearance={buttonAppearance}
-                          active={isFilterButtonActive(filter, option.id, j)}
+                          selected={isFilterButtonActive(filter, option.id, j)}
                         >
-                          {filter.type === 'colorselect' && (
-                            <span
-                              className={styles.colorInfo}
-                              style={{ backgroundColor: getCollectionColor(option.id)?.hex }}
-                            ></span>
-                          )}
                           {option.label}
-                        </Button>
-                      )
-                    })}
-                  </div>
+                        </ToggleRadioButton>
+                      ))}
+                    </div>
+                  )}
+
+                  {filter.type === 'multiselect' && (
+                    <div key={i} className={styles.filterMultiselect}>
+                      {filter.options.map((option: CollectionFilterOption, j: number) => (
+                        <ToggleButton
+                          key={j}
+                          onClick={() => {
+                            toggleFilter(filter.id, option.id, filter.type)
+                          }}
+                          selected={isFilterButtonActive(filter, option.id, j)}
+                        >
+                          {option.label}
+                        </ToggleButton>
+                      ))}
+                    </div>
+                  )}
+
+                  {filter.type === 'colorselect' && (
+                    <div key={i} className={styles.filterColorselect}>
+                      {filter.options.map((option: CollectionFilterOption, j: number) => (
+                        <ToggleColorButton
+                          key={j}
+                          onClick={() => {
+                            toggleFilter(filter.id, option.id, filter.type)
+                          }}
+                          selected={isFilterButtonActive(filter, option.id, j)}
+                          color={getCollectionColor(option.id)?.hex ?? 'black'}
+                        >
+                          {option.label}
+                        </ToggleColorButton>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )
             })}

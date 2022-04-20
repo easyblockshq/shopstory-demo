@@ -3,6 +3,8 @@ import React, { FC, ReactNode } from 'react'
 import { ButtonProps } from '../Button/Button'
 import { LinkObjProps } from '../Link/Link'
 
+export type ButtonAppearance = 'solidBlack' | 'solidWhite' | 'solidGrey' | 'outlineBlack'
+
 export const StyledClickable: FC<ButtonProps | LinkObjProps> = ({
   children,
   as,
@@ -71,20 +73,10 @@ export const StyledClickable: FC<ButtonProps | LinkObjProps> = ({
   }
 }
 
-export type Appearance =
-  | 'solidBlack'
-  | 'solidWhite'
-  | 'solidGrey'
-  | 'outlineBlack'
-  | 'radioButton'
-  | 'checkboxButton'
-  | 'colorButton'
-  | undefined
-
 export type StyledClickableProps = {
   as?: 'a' | 'button'
   size?: 'large' | 'medium' | 'small' | 'wide'
-  appearance?: Appearance
+  appearance?: ButtonAppearance
   active?: boolean
   tabIndex?: number
   children: ReactNode

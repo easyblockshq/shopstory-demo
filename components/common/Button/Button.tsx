@@ -1,18 +1,66 @@
 import React, { FC } from 'react'
-import { StyledClickable, StyledClickableProps } from '../StyledClickable/StyledClickable'
+import styles from './Button.module.css'
 
-export type ButtonProps = StyledClickableProps & {
-  disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
-  active?: boolean
+export type ButtonAppearance = 'naked' | 'solidBlack' | 'solidWhite' | 'solidGrey' | 'outlineBlack'
+
+type SharedButtonProps = {
+  type?: 'submit' | 'reset' | 'button'
+  appearance?: ButtonAppearance
+  size?: 'standard' | 'medium'
 }
 
-export const Button: FC<ButtonProps> = React.forwardRef(
-  ({ children, disabled, type, active = true, as = 'button', ...restProps }, ref) => {
+type ButtonProps = Omit<React.HTMLProps<HTMLButtonElement> | React.HTMLProps<HTMLLinkElement>, 'size'> &
+  SharedButtonProps & { as?: 'button' | 'a' }
+
+export const Button: FC<ButtonProps> = (props) => {
+  const { children, as, appearance = 'naked', size, className, ...restProps } = props
+
+  let classes = []
+
+  if (className) {
+    classes.push(className)
+  }
+
+  if (appearance) {
+    switch (appearance) {
+      case 'naked':
+        break
+      case 'solidBlack':
+        classes.push(styles.solidBlack)
+        break
+      case 'solidWhite':
+        classes.push(styles.solidWhite)
+        break
+      case 'solidGrey':
+        classes.push(styles.solidGrey)
+        break
+      case 'outlineBlack':
+        classes.push(styles.outlineBlack)
+        break
+    }
+  }
+
+  if (size) {
+    switch (size) {
+      case 'medium':
+        classes.push(styles.sizeMedium)
+        break
+    }
+  }
+
+  if (props.as === 'a') {
     return (
-      <StyledClickable as={as} active={active} disabled={disabled} type={type} ref={ref} {...restProps}>
+      // @ts-ignore
+      <a className={classes.join(' ')} {...restProps}>
         {children}
-      </StyledClickable>
+      </a>
+    )
+  } else {
+    return (
+      // @ts-ignore
+      <button className={classes.join(' ')} {...restProps}>
+        {children}
+      </button>
     )
   }
-)
+}
