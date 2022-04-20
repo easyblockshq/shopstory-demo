@@ -30,19 +30,19 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
       </Link>
       {product.relatedProducts && product.relatedProducts?.length > 1 && (
         <div className={styles.related}>
-          {product.relatedProducts.map((rproduct, i) => {
+          {product.relatedProducts.map((relatedProduct, i) => {
             let relatedLinkClasses = [styles.relatedProduct]
-            if (product.handle === rproduct.handle) {
+            if (product.handle === relatedProduct.handle) {
               relatedLinkClasses.push(styles.relatedProductActive)
             }
 
-            if (rproduct.material && rproduct.material?.length > 0) {
+            if (relatedProduct.material && relatedProduct.material?.length > 0) {
               return (
-                <Link href={'/products/' + rproduct.handle} key={i}>
+                <Link href={'/products/' + relatedProduct.handle} key={i}>
                   <a className={relatedLinkClasses.join(' ')}>
                     <div
                       className={styles.relatedMaterial}
-                      style={{ backgroundColor: getCollectionColor(rproduct.material[0].name)?.hex }}
+                      style={{ backgroundColor: getCollectionColor(relatedProduct.material[0].name)?.hex }}
                     ></div>
                   </a>
                 </Link>
