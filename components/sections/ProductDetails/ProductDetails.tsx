@@ -4,7 +4,7 @@ import { ShopifyProduct } from '../../../types'
 import { formatPrice } from '../../../utils/formatPrice'
 import AddToBagButton from '../../common/AddToBagButton/AddToBagButton'
 import { Media } from '../../common/Media/Media'
-import { Link } from '../../common/Link/Link'
+import Link from 'next/link'
 import { getCollectionColor } from '../../../data/shopify/filterCollection'
 
 const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
@@ -30,18 +30,20 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
           </div>
           {product.relatedProducts && product.relatedProducts?.length > 1 && (
             <div className={styles.related}>
-              {product.relatedProducts.map((rproduct, i) => {
+              {product.relatedProducts.map((relatedProduct, i) => {
                 let relatedLinkClasses = [styles.relatedProduct]
-                if (product.handle === rproduct.handle) {
+                if (product.handle === relatedProduct.handle) {
                   relatedLinkClasses.push(styles.relatedProductActive)
                 }
                 return (
-                  <Link href={'/products/' + rproduct.handle} key={i} className={relatedLinkClasses.join(' ')}>
-                    {rproduct.primaryImage ? (
-                      <Media media={rproduct.primaryImage} sizes="80px" />
-                    ) : (
-                      <div className={styles.placeholder}>No image</div>
-                    )}
+                  <Link href={'/products/' + relatedProduct.handle} key={i}>
+                    <a className={relatedLinkClasses.join(' ')}>
+                      {relatedProduct.primaryImage ? (
+                        <Media media={relatedProduct.primaryImage} sizes="80px" />
+                      ) : (
+                        <div className={styles.placeholder}>No image</div>
+                      )}
+                    </a>
                   </Link>
                 )
               })}

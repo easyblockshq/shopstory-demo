@@ -38,13 +38,13 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
 
             if (rproduct.material && rproduct.material?.length > 0) {
               return (
-                <Link href={'/products/' + rproduct.handle} key={i} className={styles.relatedLink}>
-                  <div className={relatedLinkClasses.join(' ')}>
+                <Link href={'/products/' + rproduct.handle} key={i}>
+                  <a className={relatedLinkClasses.join(' ')}>
                     <div
                       className={styles.relatedMaterial}
                       style={{ backgroundColor: getCollectionColor(rproduct.material[0].name)?.hex }}
                     ></div>
-                  </div>
+                  </a>
                 </Link>
               )
             }
