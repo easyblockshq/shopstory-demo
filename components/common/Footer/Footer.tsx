@@ -1,4 +1,4 @@
-import { Link } from '../Link/Link'
+import Link from 'next/link'
 import styles from './footer.module.css'
 
 const Footer = () => {
@@ -16,7 +16,10 @@ const Footer = () => {
       <div className={styles.bottom}>
         <p>© Shopstory demo store 2022</p>
         <p>
-          Content credits: <Link href={`/`}>noo.ma</Link>
+          Content credits:{' '}
+          <Link href={`/`}>
+            <a>noo.ma</a>
+          </Link>
         </p>
       </div>
     </div>
