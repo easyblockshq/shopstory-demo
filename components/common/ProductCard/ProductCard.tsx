@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { getCollectionColor } from '../../../data/shopify/filterCollection'
 import { ShopifyProduct } from '../../../types'
 import { formatPrice } from '../../../utils/formatPrice'
-import { Link } from '../Link/Link'
+import Link from 'next/link'
 import { Media } from '../Media/Media'
 import styles from './productCard.module.css'
 
@@ -10,21 +10,23 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
   return (
     <div className={styles.wrapper}>
       <Link href={'/products/' + product.handle}>
-        <div className={styles.thumbnail}>
-          {product.primaryImage ? (
-            <Media
-              media={product.primaryImage}
-              layout="fill"
-              sizes="(min-width: 1300px) 33.3333vw, (min-width: 740px) 50vw, 100vw"
-            />
-          ) : (
-            <div className={styles.placeholder}>No image</div>
-          )}
-        </div>
-        <div className={styles.info}>
-          <h2 className={styles.title}>{product.title}</h2>
-          {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}
-        </div>
+        <a>
+          <div className={styles.thumbnail}>
+            {product.primaryImage ? (
+              <Media
+                media={product.primaryImage}
+                layout="fill"
+                sizes="(min-width: 1300px) 33.3333vw, (min-width: 740px) 50vw, 100vw"
+              />
+            ) : (
+              <div className={styles.placeholder}>No image</div>
+            )}
+          </div>
+          <div className={styles.info}>
+            <h2 className={styles.title}>{product.title}</h2>
+            {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}
+          </div>
+        </a>
       </Link>
       {product.relatedProducts && product.relatedProducts?.length > 1 && (
         <div className={styles.related}>
