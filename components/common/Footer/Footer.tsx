@@ -17,8 +17,8 @@ const Footer = () => {
         <p>© Shopstory demo store 2022</p>
         <p>
           Content credits:{' '}
-          <Link href={`/`}>
-            <a>noo.ma</a>
+          <Link href={`https://noo.ma/`}>
+            <a target={'_blank'}>noo.ma</a>
           </Link>
         </p>
       </div>
