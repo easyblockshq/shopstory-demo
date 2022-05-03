@@ -42,7 +42,7 @@ Please visit `/shopstory/shopstoryCompilationConfig.tsx`to get familiar with com
 
 Editor config has all the configuration required by Shopstory Editor. It is used only during editing. Main information in this config is what widgets should be used for custom types (like `product`).
 
-Please visit `/shopstory/shopstoryEditorConfig.tsx`to get familiar with compilation config.
+Please visit `/shopstory/shopstoryEditorConfig.tsx`to get familiar with editor config.
 
 ### Editor page (`/pages/shopstory-editor`)
 
