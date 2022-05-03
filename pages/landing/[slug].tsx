@@ -24,6 +24,7 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
       </Head>
 
       <PageWrapper>
+        {/* Below we're simply rendering Shopstory compiled content */}
         <Shopstory runtimeConfig={shopstoryRuntimeConfig} src={props.shopstoryCompiledContent} />
       </PageWrapper>
     </>
@@ -41,12 +42,18 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
     return { notFound: true }
   }
 
+  // Here we simply fetch Contentful entry of the type "Landing Page".
   const entry = await fetchLandingPageEntry(params.slug, { preview: preview ?? true, locale })
 
   if (!entry) {
     return { notFound: true }
   }
 
+  /**
+   * Important!!! Shopstory compilation.
+   *
+   * This is a crucial step to integrate Shopstory but it is very simple. All you need to do is pass Shopstory-managed JSON field to the Shopstory compilation function. The returned object is "renderable".
+   */
   const shopstoryCompiledContent = await compile(
     entry.fields.shopstory,
     shopstoryCompilationConfig,

@@ -1,22 +1,23 @@
+/**
+ * This file represents runtime configuration of Shopstory.
+ */
+
 import React from 'react'
-import { RuntimeConfig, CustomComponent } from '@shopstory/core/dist/types'
+import { RuntimeConfig } from '@shopstory/core/dist/types'
 import ProductCard from '../components/common/ProductCard/ProductCard'
 import { Button } from '../components/common/Button/Button'
 import Link from 'next/link'
 
-const containerMargin = {
-  '@initial': 96,
-  '@xxl': 96,
-  '@xl': 70,
-  '@md': 40,
-  '@sm': 24,
-  '@xs': 24
-}
-
+/**
+ * This is a thin wrapper component which connects custom project button with Shopstory built-in button properties
+ */
 const ShopstoryButton = React.forwardRef(({ label, ...restProps }: any, ref) => {
   return <Button {...restProps}>{label}</Button>
 })
 
+/**
+ * Shopstory allows for custom "link actions". Here we define a link wrapper for next/link.
+ */
 function NextLinkProvider({ Component, componentProps, values }: any) {
   return (
     <Link href={values.pagePath} passHref={true}>
@@ -26,6 +27,9 @@ function NextLinkProvider({ Component, componentProps, values }: any) {
 }
 
 const shopstoryRuntimeConfig: RuntimeConfig = {
+  /**
+   * `actions` allows for defining custom actions that can be connected to buttons
+   */
   actions: [
     // {
     //   action: (values: any) => {
@@ -43,6 +47,9 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     // }
   ],
 
+  /**
+   * Aspect ratios are tokenized.
+   */
   aspectRatios: [
     {
       id: '$gridMainObjectDefault',
@@ -50,6 +57,9 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
+  /**
+   * Color tokens
+   */
   colors: [
     {
       id: 'color_black_01',
@@ -88,12 +98,21 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
+  /**
+   * Custom components.
+   *
+   * Here we connect custom components from the project to the Shopstory. Each custom components needs to have type, reference to the component and schema.
+   *
+   */
   components: [
     {
       id: 'ProductCard',
       type: 'card',
       component: ProductCard,
       schema: [
+        /**
+         * Product is a "custom type". In compilation config and editor config you will see how we define this type.
+         */
         {
           prop: 'product',
           type: 'product'
@@ -114,6 +133,9 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
+  /**
+   * Devices / breakpoints
+   */
   devices: [
     {
       breakpoint: 480,
@@ -164,6 +186,9 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
+  /**
+   * Font tokens
+   */
   fonts: [
     {
       id: 'body',
@@ -222,11 +247,17 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         lineHeight: 1.2,
         fontWeight: 700,
         '@sm': {
-          fontSize: 24
+          fontSize: 24 // responsiveness is easy
         }
       }
     }
   ],
+
+  /**
+   * Custom link actions.
+   *
+   * Below we define Next.js link. Each custom link action can have its own custom schema.
+   */
   links: [
     {
       id: 'MyLink',
@@ -242,6 +273,9 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     }
   ],
 
+  /**
+   * Collection page grid information
+   */
   mainGrid: {
     containerMargin: 0,
     horizontalGap: 1,
@@ -252,10 +286,22 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
     verticalGap: 24
   },
 
+  /**
+   * Space tokens.
+   *
+   * containerMargin.default is a default container margin for the page.
+   */
   space: [
     {
       id: 'containerMargin.default',
-      value: containerMargin
+      value: {
+        '@initial': 96,
+        '@xxl': 96,
+        '@xl': 70,
+        '@md': 40,
+        '@sm': 24,
+        '@xs': 24
+      }
     }
   ]
 }
