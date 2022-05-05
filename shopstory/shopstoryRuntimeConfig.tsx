@@ -209,28 +209,8 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       }
     },
     {
-      id: 'heading1',
-      label: 'heading1',
-      value: {
-        fontFamily: 'test-national-2',
-        fontSize: 21,
-        lineHeight: 1.4,
-        fontWeight: 600
-      }
-    },
-    {
-      id: 'heading2',
-      label: 'heading2',
-      value: {
-        fontFamily: 'test-national-2',
-        fontSize: 16,
-        lineHeight: 1.4,
-        fontWeight: 600
-      }
-    },
-    {
-      id: 'heading3',
-      label: 'heading3',
+      id: 'heading5',
+      label: 'heading5',
       value: {
         fontFamily: 'test-national-2',
         fontSize: 13,
@@ -243,11 +223,44 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       label: 'heading4',
       value: {
         fontFamily: 'test-national-2',
+        fontSize: 16,
+        lineHeight: 1.4,
+        fontWeight: 600
+      }
+    },
+    {
+      id: 'heading3',
+      label: 'heading3',
+      value: {
+        fontFamily: 'test-national-2',
+        fontSize: 21,
+        lineHeight: 1.4,
+        fontWeight: 600
+      }
+    },
+    {
+      id: 'heading2',
+      label: 'heading2',
+      value: {
+        fontFamily: 'test-national-2',
         fontSize: 36,
         lineHeight: 1.2,
         fontWeight: 700,
         '@sm': {
           fontSize: 24 // responsiveness is easy
+        }
+      }
+    },
+    {
+      id: 'heading1',
+      label: 'heading1',
+      value: {
+        fontFamily: 'test-national-2',
+        fontSize: 48,
+        lineHeight: 1.2,
+        fontWeight: 700,
+        '@sm': {
+          fontSize: 36 // responsiveness is easy
         }
       }
     }
@@ -297,7 +310,29 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       value: {
         '@initial': 96,
         '@xxl': 96,
-        '@xl': 70,
+        '@xl': 80,
+        '@md': 40,
+        '@sm': 24,
+        '@xs': 24
+      }
+    },
+    {
+      id: 'containerMargin.large',
+      value: {
+        '@initial': 384,
+        '@xxl': 384,
+        '@xl': 320,
+        '@md': 40,
+        '@sm': 24,
+        '@xs': 24
+      }
+    },
+    {
+      id: 'containerMargin.medium',
+      value: {
+        '@initial': 192,
+        '@xxl': 192,
+        '@xl': 160,
         '@md': 40,
         '@sm': 24,
         '@xs': 24
