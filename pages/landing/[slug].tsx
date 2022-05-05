@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
   }
 
   // Here we simply fetch Contentful entry of the type "Landing Page".
-  const entry = await fetchLandingPageEntry(params.slug, { preview: preview ?? true, locale })
+  const entry = await fetchLandingPageEntry(params.slug, { preview: !!preview, locale })
 
   if (!entry) {
     return { notFound: true }

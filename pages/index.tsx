@@ -32,7 +32,7 @@ const Home: NextPage<HomeProps> = (props) => {
 export const getStaticProps: GetStaticProps<HomeProps, { slug: string }> = async (context) => {
   let { preview, locale = 'en-US' } = context
 
-  const entry = await fetchHomepageEntry({ preview: preview ?? true, locale })
+  const entry = await fetchHomepageEntry({ preview: !!preview, locale })
 
   if (!entry) {
     return { notFound: true }
