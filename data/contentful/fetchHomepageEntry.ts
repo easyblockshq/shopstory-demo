@@ -13,7 +13,7 @@ export async function fetchHomepageEntry(options: ContentfulQueryParams): Promis
     const response = await client.getEntries({
       limit: 1,
       include: 2,
-      content_type: 'homepage',
+      content_type: 'home',
       locale
     })
 
@@ -26,5 +26,5 @@ export async function fetchHomepageEntry(options: ContentfulQueryParams): Promis
     return
   }
 
-  return entry.fields.landingPage
+  return entry
 }
