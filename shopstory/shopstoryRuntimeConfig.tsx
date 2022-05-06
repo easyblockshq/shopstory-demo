@@ -161,10 +161,10 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       // hidden: true
     },
     {
+      breakpoint: 1280,
       id: 'lg',
       w: 1024,
       h: 768,
-      breakpoint: 1280,
       label: 'TabletH',
       hidden: true
     },
@@ -311,6 +311,7 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         '@initial': 96,
         '@xxl': 96,
         '@xl': 80,
+        '@lg': 60,
         '@md': 40,
         '@sm': 24,
         '@xs': 24
@@ -321,7 +322,8 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       value: {
         '@initial': 384,
         '@xxl': 384,
-        '@xl': 320,
+        '@xl': 280,
+        '@lg': 160,
         '@md': 40,
         '@sm': 24,
         '@xs': 24
@@ -333,6 +335,7 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         '@initial': 192,
         '@xxl': 192,
         '@xl': 160,
+        '@lg': 92,
         '@md': 40,
         '@sm': 24,
         '@xs': 24

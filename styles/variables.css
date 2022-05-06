@@ -1,9 +1,9 @@
 /* Breakpoints */
 @custom-media --sm (min-width: 480px);
-@custom-media --md (min-width: 740px);
+@custom-media --md (min-width: 768px);
 @custom-media --lg (min-width: 1024px);
 @custom-media --xl (min-width: 1280px);
-@custom-media --xxl (min-width: 1920px);
+@custom-media --xxl (min-width: 1680px);
 
 :root {
   /* Colors */
@@ -50,10 +50,10 @@
     --containerMargin: 40px;
   }
   @media (--lg) {
-    --containerMargin: 50px;
+    --containerMargin: 60px;
   }
   @media (--xl) {
-    --containerMargin: 70px;
+    --containerMargin: 80px;
   }
   @media (--xxl) {
     --containerMargin: 96px;
