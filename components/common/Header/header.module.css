@@ -10,6 +10,7 @@
   @mixin container-standard;
 
   @media (--md) {
+    position: absolute;
     height: var(--headerHeight);
     background-color: inherit;
   }

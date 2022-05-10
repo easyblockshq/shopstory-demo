@@ -34,9 +34,10 @@
 
 .related {
   margin-top: var(--size_03);
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: center;
+  grid-column-gap: 9px;
 }
 
 .relatedLink {

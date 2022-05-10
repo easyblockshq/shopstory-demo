@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { setAppElement } from 'react-modal'
 import LoaderSection from '../components/sections/LoaderSection/LoaderSection'
+import { Toast } from '../components/common/Toast/Toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -41,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {pageProps.noHeaderAndFooter && pageContent}
 
       <div id={'modalContainer'} />
+      <div id={'toastContainer'} />
     </>
   )
 }

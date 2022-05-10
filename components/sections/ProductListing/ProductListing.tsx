@@ -19,6 +19,7 @@ import { ToggleRadioButton } from '../../common/ToggleRadioButton/ToggleRadioBut
 import CloseIcon from '../../icons/CloseIcon'
 import { shopstoryRuntimeConfig } from '../../../shopstory/shopstoryRuntimeConfig'
 import { ShopstoryGrid } from '@shopstory/core/dist/client/Shopstory'
+import Link from 'next/link'
 
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0
@@ -120,13 +121,10 @@ const ProductListing: FC<PLPProps> = (props) => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.heading}>
-          <h1 className={styles.title}>{props.collection.title}</h1>
-          {props.collection.descriptionHtml && (
-            <div
-              className={styles.description}
-              dangerouslySetInnerHTML={{ __html: props.collection.descriptionHtml }}
-            />
-          )}
+          <Link href={'/category/all'}>
+            <a className={styles.title}>All</a>
+          </Link>
+          <h1 className={styles.description}>{props.collection.title}</h1>
         </div>
         <div className={styles.filtersContainer}>
           <Button appearance={'outlineBlack'} size={'medium'} onClick={toggleFilterModal}>

@@ -1,10 +1,28 @@
 import CartIcon from '../../icons/CartIcon'
-import SearchIcon from '../../icons/SearchIcon'
+// import SearchIcon from '../../icons/SearchIcon'
 import { Button } from '../Button/Button'
 import styles from './header.module.css'
 import Link from 'next/link'
+import { ToastPortal } from '../Toast/ToastPortal'
+import { Toast } from '../Toast/Toast'
+import { useState } from 'react'
 
 const Header = () => {
+  const [isToastActive, setIsToastActive] = useState(false)
+  const [isToastVisible, setIsToastVisible] = useState(false)
+
+  const openToast = () => {
+    if (!isToastActive && !isToastVisible) {
+      setTimeout(function () {
+        setIsToastVisible(false)
+        setTimeout(function () {
+          setIsToastActive(false)
+        }, 700)
+      }, 3000)
+      setIsToastActive(true)
+      setIsToastVisible(true)
+    }
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftContainer}>
@@ -22,7 +40,7 @@ const Header = () => {
       </div>
 
       <div className={styles.nav}>
-        <Link href={'/category/all'} passHref>
+        <Link href={'/category/new'} passHref>
           <Button as={'a'}>What’s new</Button>
         </Link>
 
@@ -35,21 +53,24 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.rightContainer}>
-        <Button
+        {/* <Button
           onClick={() => {
             console.log('Search button click')
           }}
         >
           <SearchIcon />
-        </Button>
+        </Button> */}
         <Button
           onClick={() => {
-            console.log('Cart button click')
+            openToast()
           }}
         >
           <CartIcon />
         </Button>
       </div>
+      <ToastPortal>
+        {isToastActive && <Toast message={'This is a demo store'} isVisible={isToastVisible} />}
+      </ToastPortal>
     </div>
   )
 }

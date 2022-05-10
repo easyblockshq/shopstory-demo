@@ -10,18 +10,15 @@
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   width: 100%;
   position: relative;
   padding-top: var(--headerHeightMobile);
-  //padding-bottom: var(--size_08);
 
   @media (--md) {
     display: block;
     background-color: var(--color_beige_01);
     padding-top: var(--headerHeight);
-    padding-bottom: 0;
   }
 
   &::-webkit-scrollbar-track {
@@ -57,11 +54,8 @@
 
 .galleryItem {
   width: 100%;
-  min-width: 100%;
-  scroll-snap-align: start;
-
   @media (--md) {
-    scroll-snap-align: unset;
+    min-width: 100% !important;
   }
 }
 
@@ -73,6 +67,13 @@
   @media (--md) {
     padding-top: var(--size_15);
     padding-bottom: var(--size_15);
+  }
+}
+
+.contentContainer {
+  @media (--md) {
+    position: sticky;
+    top: 100px;
   }
 }
 

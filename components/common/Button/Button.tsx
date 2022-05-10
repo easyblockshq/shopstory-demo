@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import styles from './Button.module.css'
 
-export type ButtonAppearance = 'naked' | 'solidBlack' | 'solidWhite' | 'solidGrey' | 'outlineBlack'
+export type ButtonAppearance = 'naked' | 'solidBlack' | 'solidWhite' | 'solidGrey' | 'outlineBlack' | 'underlinedBlack'
 
 type SharedButtonProps = {
   type?: 'submit' | 'reset' | 'button'
   appearance?: ButtonAppearance
-  size?: 'standard' | 'medium'
+  size?: 'standard' | 'small' | 'medium'
 }
 
 type ButtonProps = Omit<React.HTMLProps<HTMLButtonElement> | React.HTMLProps<HTMLLinkElement>, 'size'> &
@@ -37,11 +37,17 @@ export const Button: FC<ButtonProps> = (props) => {
       case 'outlineBlack':
         classes.push(styles.outlineBlack)
         break
+      case 'underlinedBlack':
+        classes.push(styles.underlinedBlack)
+        break
     }
   }
 
   if (size) {
     switch (size) {
+      case 'small':
+        classes.push(styles.sizeSmall)
+        break
       case 'medium':
         classes.push(styles.sizeMedium)
         break

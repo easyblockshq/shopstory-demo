@@ -95,6 +95,11 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
       id: 'grey_01',
       label: 'grey_01',
       value: '#a0a09d'
+    },
+    {
+      id: 'grey_02',
+      label: 'grey_02',
+      value: '#4F4F4F'
     }
   ],
 
@@ -127,7 +132,7 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         {
           prop: 'appearance',
           type: 'select',
-          options: ['solidBlack', 'solidGrey', 'solidWhite', 'outlineBlack']
+          options: ['solidBlack', 'solidGrey', 'solidWhite', 'outlineBlack', 'underlinedBlack']
         }
       ]
     }

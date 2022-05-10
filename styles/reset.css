@@ -175,15 +175,17 @@ div:focus {
   outline: none;
 }
 input:focus-visible + label {
-  outline: #36b7b2 solid 3px;
+  outline: #8e8e8e solid 2px;
   outline-offset: -2px;
+  border-radius: 12px;
 }
 
 _:future,
 :root button:focus-visible,
 :root a:focus-visible {
-  outline: #36b7b2 solid 3px;
+  outline: #8e8e8e solid 2px;
   outline-offset: 4px;
+  border-radius: 12px;
   z-index: 2;
 }
 
