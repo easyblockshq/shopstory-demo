@@ -3,7 +3,7 @@ import { ContentfulQueryParams } from './ContentfulQueryParams'
 import { createContentfulClient } from './createContentfulClient'
 
 export async function fetchCollectionEntry(
-  collectionId: string,
+  slug: string,
   options: ContentfulQueryParams
 ): Promise<Entry<any> | undefined> {
   const locale = options.locale ?? 'en-US'
@@ -17,7 +17,7 @@ export async function fetchCollectionEntry(
       limit: 1,
       include: 2,
       content_type: 'collectionPage',
-      'fields.collectionId': collectionId,
+      'fields.slug': slug,
       locale
     })
 
