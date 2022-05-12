@@ -40,11 +40,12 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
     }
 
     window.addEventListener('resize', handleResize)
+    handleResize()
 
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  })
+  }, [])
 
   return (
     <div className={styles.wrapper}>
