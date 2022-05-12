@@ -31,7 +31,7 @@ export const Modal: FC<ModalProps> = ({
   children,
   ...reactModalProps
 }) => {
-  const transitionTime = 300
+  const transitionTime = 200
 
   const parsedOverlayCloseButtonLabel = overlayCloseButtonLabel ?? 'Close'
 
@@ -77,7 +77,7 @@ export const Modal: FC<ModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       overlayElement={(props, contentElement) => (
-        <div {...props} style={{ transition: `opacity ${transitionTime}ms ease-in-out` }}>
+        <div {...props} style={{ transition: `opacity ${transitionTime}ms linear ${isOpen ? 0 : transitionTime}ms` }}>
           {contentElement}
         </div>
       )}
@@ -88,7 +88,7 @@ export const Modal: FC<ModalProps> = ({
       )}
       className={contentClasses.join(' ')}
       overlayClassName={overlayClasses.join(' ')}
-      closeTimeoutMS={transitionTime}
+      closeTimeoutMS={2 * transitionTime}
     >
       {children}
     </ReactModal>
