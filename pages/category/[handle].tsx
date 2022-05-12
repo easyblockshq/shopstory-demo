@@ -39,16 +39,15 @@ export const getStaticProps: GetStaticProps<PLPProps> = async ({ params, preview
     }
   }
 
-  const responses = await Promise.all([fetchCollectionByHandle(handle)])
-  const fullCollection = responses[0]
+  const collectionEntry = await fetchCollectionEntry(handle, { locale, preview: !!preview })
+  const shopifyCollectionHandle = collectionEntry?.fields.collectionId ?? handle
 
+  const fullCollection = await fetchCollectionByHandle(shopifyCollectionHandle)
   if (!fullCollection) {
     return {
       notFound: true
     }
   }
-
-  const collectionEntry = await fetchCollectionEntry(handle, { locale, preview: !!preview })
 
   const shopstoryCompiledContent = await compile(
     collectionEntry?.fields.shopstory,
