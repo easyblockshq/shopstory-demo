@@ -10,15 +10,19 @@
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   width: 100%;
   position: relative;
   padding-top: var(--headerHeightMobile);
+  height: 60vh;
 
   @media (--md) {
     display: block;
     background-color: var(--color_beige_01);
     padding-top: var(--headerHeight);
+    overflow-x: inherit;
+    height: auto;
   }
 
   &::-webkit-scrollbar-track {
@@ -53,8 +57,12 @@
 }
 
 .galleryItem {
+  position: relative;
   width: 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
   @media (--md) {
+    scroll-snap-align: unset;
     min-width: 100% !important;
   }
 }
