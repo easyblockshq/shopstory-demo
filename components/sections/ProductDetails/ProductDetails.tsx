@@ -1,5 +1,5 @@
 import styles from './productDetails.module.css'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { ShopifyProduct } from '../../../types'
 import { formatPrice } from '../../../utils/formatPrice'
 import AddToBagButton from '../../common/AddToBagButton/AddToBagButton'
@@ -8,12 +8,16 @@ import Link from 'next/link'
 import { getCollectionColor } from '../../../data/shopify/filterCollection'
 import { ToastPortal } from '../../common/Toast/ToastPortal'
 import { Toast } from '../../common/Toast/Toast'
+import { Button } from '../../common/Button/Button'
 
 const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
+  const descriptionRef = useRef<HTMLDivElement | null>(null)
+  const [isReadMoreButtonActive, setReadMoreButtonActive] = useState(false)
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false)
   const [isToastActive, setIsToastActive] = useState(false)
   const [isToastVisible, setIsToastVisible] = useState(false)
-  const [layout, setLayout] = useState<'fill' | 'responsive'>('fill')
-  const [objectFit, setObjectFit] = useState<'cover' | 'contain' | undefined>('contain')
+  const [galleryItemLayout, setGalleryItemLayout] = useState<'fill' | 'responsive'>('fill')
+  const [galleryItemObjectFit, setGalleryItemObjectFit] = useState<'cover' | 'contain' | undefined>('contain')
 
   const openToast = () => {
     if (!isToastActive && !isToastVisible) {
@@ -31,11 +35,19 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setLayout('fill')
-        setObjectFit('contain')
+        setGalleryItemLayout('fill')
+        setGalleryItemObjectFit('contain')
       } else {
-        setLayout('responsive')
-        setObjectFit(undefined)
+        setGalleryItemLayout('responsive')
+        setGalleryItemObjectFit(undefined)
+      }
+
+      if (descriptionRef.current) {
+        if (descriptionRef.current?.offsetHeight < descriptionRef.current?.scrollHeight) {
+          setReadMoreButtonActive(true)
+        } else {
+          setReadMoreButtonActive(false)
+        }
       }
     }
 
@@ -57,8 +69,8 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
                 <Media
                   media={item}
                   sizes={`(min-width: 1000px) calc(100vw - 480px), 100vw`}
-                  layout={layout}
-                  objectFit={objectFit}
+                  layout={galleryItemLayout}
+                  objectFit={galleryItemObjectFit}
                 />
               </div>
             )
@@ -107,7 +119,23 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
               {isToastActive && <Toast message={'This is a demo store'} isVisible={isToastVisible} />}
             </ToastPortal>
           </div>
-          <div className={styles.description} dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          <div
+            className={[styles.description, !isDescriptionOpen ? styles.isShortened : ''].join(' ')}
+            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+            ref={descriptionRef}
+          />
+          {isReadMoreButtonActive && (
+            <Button
+              size={'small'}
+              appearance={'extraSmall'}
+              onClick={() => {
+                setIsDescriptionOpen(true)
+                setReadMoreButtonActive(false)
+              }}
+            >
+              Read more
+            </Button>
+          )}
         </div>
       </div>
     </div>

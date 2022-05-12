@@ -49,6 +49,12 @@
 
   a {
     @mixin font-heading02;
+    transition: color 200ms, border-color 200ms;
+
+    &:hover {
+      color: var(--color_grey_01);
+      border-color: var(--color_grey_01);
+    }
   }
 }
 

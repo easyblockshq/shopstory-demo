@@ -44,6 +44,11 @@
   height: 22px;
   color: var(--color_white_01);
   margin-left: var(--size_06);
+  transition: background-color 200ms;
+
+  button:hover & {
+    background-color: var(--color_grey_01);
+  }
 }
 
 .title {

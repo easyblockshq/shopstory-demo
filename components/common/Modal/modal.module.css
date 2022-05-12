@@ -8,13 +8,13 @@
   overflow-y: auto;
   z-index: 9999;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .content {
   position: relative;
   border: none;
   max-width: 100%;
+  z-index: 999;
 }
 
 .contentPosition_center {

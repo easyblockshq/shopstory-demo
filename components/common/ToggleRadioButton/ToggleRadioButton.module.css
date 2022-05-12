@@ -4,6 +4,7 @@
   text-align: left;
   display: flex;
   align-items: center;
+  transition: color 200ms;
 
   &:before {
     content: '';
@@ -12,6 +13,7 @@
     height: 20px;
     border-radius: 50%;
     border: 1px solid var(--color_white_01);
+    transition: border-color 200ms;
     margin-right: var(--size_06);
   }
 
@@ -33,6 +35,13 @@
     }
     &:after {
       opacity: 0;
+    }
+
+    &:hover {
+      color: var(--color_grey_01);
+      &:before {
+        border-color: var(--color_grey_01);
+      }
     }
   }
 }

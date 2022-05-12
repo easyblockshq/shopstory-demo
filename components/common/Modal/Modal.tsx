@@ -77,7 +77,7 @@ export const Modal: FC<ModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       overlayElement={(props, contentElement) => (
-        <div {...props} style={{ transition: `opacity ${transitionTime}ms linear ${isOpen ? 0 : transitionTime}ms` }}>
+        <div {...props} style={{ transition: `opacity 0ms linear ${isOpen ? 0 : transitionTime}ms` }}>
           {contentElement}
         </div>
       )}

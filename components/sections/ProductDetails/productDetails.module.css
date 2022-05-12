@@ -154,5 +154,15 @@
 .description {
   @mixin font-body02;
   margin-top: var(--size_10);
+  margin-bottom: var(--size_04);
   color: var(--color_black_02);
+
+  &.isShortened {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
 }

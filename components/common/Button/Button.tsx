@@ -1,7 +1,14 @@
 import React, { FC } from 'react'
 import styles from './Button.module.css'
 
-export type ButtonAppearance = 'naked' | 'solidBlack' | 'solidWhite' | 'solidGrey' | 'outlineBlack' | 'underlinedBlack'
+export type ButtonAppearance =
+  | 'naked'
+  | 'solidBlack'
+  | 'solidWhite'
+  | 'solidGrey'
+  | 'outlineBlack'
+  | 'underlinedBlack'
+  | 'extraSmall'
 
 type SharedButtonProps = {
   type?: 'submit' | 'reset' | 'button'
@@ -39,6 +46,9 @@ export const Button: FC<ButtonProps> = (props) => {
         break
       case 'underlinedBlack':
         classes.push(styles.underlinedBlack)
+        break
+      case 'extraSmall':
+        classes.push(styles.extraSmall)
         break
     }
   }
