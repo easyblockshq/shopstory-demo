@@ -514,10 +514,10 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.0.tgz"
   "version" "1.1.0"
 
-"@shopstory/core@0.5.0-alpha.0":
-  "integrity" "sha512-HKJ7+4vk+idYxiQv3uJPdcdZGyJhMzGLuNOXraPPJOG5gFf8JouUMW1u2MYn942rF4srOEcLqM9ydAS7qJJE7g=="
-  "resolved" "https://registry.npmjs.org/@shopstory/core/-/core-0.5.0-alpha.0.tgz"
-  "version" "0.5.0-alpha.0"
+"@shopstory/core@0.5.0-alpha.3":
+  "integrity" "sha512-GzJypjkhqiG+RrPa8ZaEFoUX/KlOlFIgrRxros9Hmt9XuoRTKIGSRfYhXSAJqCNJW+VYy9BN3xlmFTcqEwgSOw=="
+  "resolved" "https://registry.npmjs.org/@shopstory/core/-/core-0.5.0-alpha.3.tgz"
+  "version" "0.5.0-alpha.3"
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@contentful/app-sdk" "^4.3.0"
@@ -525,7 +525,7 @@
     "@contentful/forma-36-react-components" "3.100.3"
     "@contentful/forma-36-tokens" "0.11.1"
     "@emotion/styled" "^11.6.0"
-    "@shopstory/design-system" "^0.5.0-alpha.0"
+    "@shopstory/design-system" "^0.5.0-alpha.3"
     "@stitches/core" "^1.2.5"
     "contentful" "^9.1.4"
     "contentful-management" "^7.45.0"
@@ -540,10 +540,10 @@
     "styled-components" "^5.3.3"
     "tslib" "^2.3.1"
 
-"@shopstory/design-system@^0.5.0-alpha.0":
-  "integrity" "sha512-HmF4hqAnV3+49cIreVgapdqEWMUXxLuRRtZdirCf8FsrOoNSNbW/LHoRE1xqiI5QVByU6exCboYuUzzKJ7zfAQ=="
-  "resolved" "https://registry.npmjs.org/@shopstory/design-system/-/design-system-0.5.0-alpha.0.tgz"
-  "version" "0.5.0-alpha.0"
+"@shopstory/design-system@^0.5.0-alpha.3":
+  "integrity" "sha512-sE42ypVHYdhNZx2glF9aoqGIdujFOcTjwHutSpk7eDuOk2yhyo14bcZQkkRNMQtveOgZZHCakP1NyLY927ZiVg=="
+  "resolved" "https://registry.npmjs.org/@shopstory/design-system/-/design-system-0.5.0-alpha.3.tgz"
+  "version" "0.5.0-alpha.3"
   dependencies:
     "react-modal" "^3.12.1"
 
@@ -591,6 +591,13 @@
   "integrity" "sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ=="
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz"
   "version" "15.7.4"
+
+"@types/react-dom@17.0.9":
+  "integrity" "sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.9.tgz"
+  "version" "17.0.9"
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-modal@^3.13.1":
   "integrity" "sha512-iY/gPvTDIy6Z+37l+ibmrY+GTV4KQTHcCyR5FIytm182RQS69G5ps4PH2FxtC7bAQ2QRHXMevsBgck7IQruHNg=="
