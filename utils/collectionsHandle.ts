@@ -10,10 +10,10 @@ export const buildHandle = (handle: string | null, values: CollectionFilterValue
   if (values.sort) {
     ret += `__sort_${values.sort}`
   }
-  if (Array.isArray(values.material) && values.material.length > 0) {
-    ret += '__material'
+  if (Array.isArray(values.color) && values.color.length > 0) {
+    ret += '__color'
 
-    values.material.forEach((c: string) => {
+    values.color.forEach((c: string) => {
       ret += `_${c}`
     })
   }
@@ -54,7 +54,7 @@ export const decomposeHandle = (fullHandle: string): { handle: string; values: C
       }
     }
 
-    if (key === 'room' || key === 'material') {
+    if (key === 'room' || key === 'color') {
       return {
         ...acc,
         [key]: parts.slice(1)

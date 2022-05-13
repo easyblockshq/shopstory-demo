@@ -7,6 +7,8 @@ export const config = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  return res.status(500).json({ key: 'SAVING_ERROR' })
+
   const options = {
     method: 'POST',
     headers: { Accept: 'text/html', 'Content-Type': 'application/x-www-form-urlencoded' },

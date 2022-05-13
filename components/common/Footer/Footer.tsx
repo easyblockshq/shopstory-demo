@@ -23,7 +23,7 @@ const Footer = () => {
         if (res.ok) {
           form.reset()
           setErrorMessage('default')
-          setSuccessMessage('Added to waitlist!')
+          setSuccessMessage("You're signed up!")
           setTimeout(() => {
             setSuccessMessage('default')
           }, 5000)
@@ -33,7 +33,7 @@ const Footer = () => {
       .then((err) => {
         if (err.key) {
           setSuccessMessage('default')
-          setErrorMessage('Oops! Something went wrong.')
+          setErrorMessage('Oops! Something went wrong. Try again.')
           //todo
           // switch (err.key) {
           //   case 'GENERAL_ERROR': {

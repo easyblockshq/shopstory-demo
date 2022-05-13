@@ -80,8 +80,8 @@ const ProductDetails: FC<{ product: ShopifyProduct }> = ({ product }) => {
         <div className={styles.contentContainer}>
           <h1 className={styles.title}>{product.title}</h1>
           <div className={styles.details}>
-            {product.material && product.material?.length > 0 && (
-              <div className={styles.material}>{getCollectionColor(product.material[0].name)?.fullName}</div>
+            {product.color && product.color?.length > 0 && (
+              <div className={styles.color}>{getCollectionColor(product.color[0].name)?.fullName}</div>
             )}
             <div className={styles.prices}>
               {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}

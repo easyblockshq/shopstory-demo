@@ -2,21 +2,63 @@ import { CollectionFilter } from '../../types'
 
 const COLORS = [
   {
-    hex: '#000000',
-    name: 'black-oak',
-    fullName: 'Black oak',
+    hex: '#2a4363',
+    name: 'blue',
+    fullName: 'Blue',
     isLight: false
   },
   {
-    hex: '#CEBEA9',
+    hex: '#3a5633',
+    name: 'green',
+    fullName: 'Green',
+    isLight: false
+  },
+  {
+    hex: '#f1e9dc',
+    name: 'beige',
+    fullName: 'Beige',
+    isLight: false
+  },
+  {
+    hex: '#000000',
+    name: 'black',
+    fullName: 'Black',
+    isLight: false
+  },
+  {
+    hex: '#521819',
+    name: 'burgundy',
+    fullName: 'Burgundy',
+    isLight: false
+  },
+  {
+    hex: '#dad6d4',
+    name: 'light-grey',
+    fullName: 'Light Grey',
+    isLight: false
+  },
+  {
+    hex: '#ccb18d',
     name: 'oak',
     fullName: 'Oak',
     isLight: false
   },
   {
-    hex: '#43496F',
-    name: 'blue-oak',
-    fullName: 'Blue oak',
+    hex: '#b6452f',
+    name: 'terracotta',
+    fullName: 'Terracotta',
+    isLight: false
+  },
+  {
+    hex: '#7f655a',
+    name: 'walnut',
+    fullName: 'Walnut',
+    isLight: false
+  },
+  {
+    hex: '#FCD431',
+    name: 'yellow',
+    fullName: 'Yellow',
     isLight: false
   }
 ]
@@ -48,9 +90,9 @@ const filterCollectionFunction = (collection: any, options: any) => {
     }
   }
 
-  if (Array.isArray(options.material)) {
+  if (Array.isArray(options.color)) {
     const products = collection.products.filter(
-      (p: any) => p.material.filter((m: any) => m.name && options.material.includes(m.name)).length > 0
+      (p: any) => p.color.filter((m: any) => m.name && options.color.includes(m.name)).length > 0
     )
 
     collection = {
@@ -153,21 +195,49 @@ const filterCollectionFunction = (collection: any, options: any) => {
   })
 
   filters.push({
-    id: 'material',
-    label: 'Material',
+    id: 'color',
+    label: 'Color',
     type: 'colorselect',
     options: [
       {
-        id: 'black-oak',
-        label: 'Black oak'
+        id: 'blue',
+        label: 'Blue'
+      },
+      {
+        id: 'green',
+        label: 'Green'
+      },
+      {
+        id: 'beige',
+        label: 'Beige'
+      },
+      {
+        id: 'black',
+        label: 'Black'
+      },
+      {
+        id: 'burgundy',
+        label: 'Burgundy'
+      },
+      {
+        id: 'light-grey',
+        label: 'Light Grey'
       },
       {
         id: 'oak',
         label: 'Oak'
       },
       {
-        id: 'blue-oak',
-        label: 'Blue oak'
+        id: 'terracotta',
+        label: 'Terracotta'
+      },
+      {
+        id: 'walnut',
+        label: 'Walnut'
+      },
+      {
+        id: 'yellow',
+        label: 'Yellow'
       }
     ]
   })

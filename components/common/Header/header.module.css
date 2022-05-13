@@ -79,6 +79,17 @@
       margin-right: calc(-1 * var(--size_06));
       display: block;
     }
+
+    svg {
+      opacity: 1;
+      transition: opacity 200ms;
+    }
+
+    &:hover {
+      svg {
+        opacity: 0.4;
+      }
+    }
   }
 }
 

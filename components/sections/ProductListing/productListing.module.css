@@ -44,16 +44,22 @@
   height: 22px;
   color: var(--color_white_01);
   margin-left: var(--size_06);
-  transition: background-color 200ms;
+  transition: background-color 200ms, color 200ms;
 
   button:hover & {
-    background-color: var(--color_grey_01);
+    background-color: var(--color_white_01);
+    color: var(--color_black_01);
   }
 }
 
 .title {
   @mixin font-heading02;
   font-weight: 400;
+  transition: opacity 200ms;
+
+  &:hover {
+    opacity: 0.4;
+  }
 }
 
 .description {
@@ -82,10 +88,19 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: var(--size_09);
+  align-items: center;
 }
 
 .modalHeading {
   @mixin font-body02;
+}
+
+.modalCloseButton {
+  padding: var(--size_04) 0 var(--size_04) var(--size_04);
+  transition: opacity 200ms;
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 .modalContent {
@@ -125,12 +140,15 @@
 }
 
 .filterColorselect {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--size_07);
+  @media (--sm) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   button {
-    margin-bottom: var(--size_07);
+    justify-self: center;
   }
 }
 

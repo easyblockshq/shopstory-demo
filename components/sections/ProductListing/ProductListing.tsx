@@ -24,8 +24,8 @@ import Link from 'next/link'
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0
 
-  if (activeFilters?.material) {
-    counter = counter + activeFilters.material.length
+  if (activeFilters?.color) {
+    counter = counter + activeFilters.color.length
   }
   if (activeFilters?.room) {
     counter = counter + activeFilters.room.length
@@ -128,7 +128,7 @@ const ProductListing: FC<PLPProps> = (props) => {
         </div>
         <div className={styles.filtersContainer}>
           <Button appearance={'outlineBlack'} size={'medium'} onClick={toggleFilterModal}>
-            Filter <span className={styles.counter}>{activeFiltersCount}</span>
+            Filter {activeFiltersCount > 0 && <span className={styles.counter}>{activeFiltersCount}</span>}
           </Button>
         </div>
       </div>
@@ -151,7 +151,7 @@ const ProductListing: FC<PLPProps> = (props) => {
         <div className={`ReactModal__Animation--right ${styles.filters}`}>
           <div className={styles.modalHeader}>
             <span className={styles.modalHeading}>Filter</span>
-            <Button onClick={toggleFilterModal}>
+            <Button onClick={toggleFilterModal} className={styles.modalCloseButton}>
               <CloseIcon />
             </Button>
           </div>
@@ -217,7 +217,7 @@ const ProductListing: FC<PLPProps> = (props) => {
           </div>
           <div className={styles.modalFooter}>
             <Button appearance={'solidWhite'} onClick={toggleFilterModal}>
-              Apply ({activeFiltersCount})
+              Apply {activeFiltersCount > 0 ? `(${activeFiltersCount})` : ''}
             </Button>
             <Button appearance={'solidGrey'} onClick={() => onChange({})}>
               Clear all
