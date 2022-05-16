@@ -1,4 +1,4 @@
-import { ShopifyProductMaterial, ShopifyProductRoom } from '../types'
+import { ShopifyProductColor, ShopifyProductRoom } from '../types'
 import { removeEdges } from './removeEdges'
 
 export const mapProduct = (product: any) => {
@@ -39,11 +39,11 @@ export const mapProduct = (product: any) => {
   let primaryImage = productImages[0] ?? null
   let secondaryImage = productImages[1] ?? null
 
-  let material: ShopifyProductMaterial[] = []
+  let color: ShopifyProductColor[] = []
   product.tags.map((tag: string) => {
-    if (tag.includes('material-')) {
-      material.push({
-        name: tag.toLowerCase().replace('material-', '')
+    if (tag.includes('color-')) {
+      color.push({
+        name: tag.toLowerCase().replace('color-', '')
       })
     }
   })
@@ -63,7 +63,7 @@ export const mapProduct = (product: any) => {
   const compareAtPrice = compareAtPrices[0]
 
   const restProduct = {
-    material,
+    color,
     tags: product.tags,
     room,
     media:
@@ -88,7 +88,7 @@ export const mapProduct = (product: any) => {
       available: variant.availableForSale,
       isLowStock: false,
       isFinalSale: false,
-      material,
+      color,
       room,
       productId: product.id,
       productHandle: product.handle

@@ -11,7 +11,7 @@ export type ShopifyPrice = {
   currencyCode: string
 }
 
-export type ShopifyProductMaterial = {
+export type ShopifyProductColor = {
   name: string
 }
 
@@ -31,7 +31,7 @@ export type ShopifyProduct = {
   secondaryImage?: MediaObject
   relatedProducts?: ShopifyProduct[]
   tags?: string[]
-  material?: ShopifyProductMaterial[]
+  color?: ShopifyProductColor[]
 }
 
 export type ShopifyCollectionWithEdges = {
@@ -65,7 +65,7 @@ export type CollectionFilterButtonType = 'select' | 'multiselect' | 'colorselect
 
 export type CollectionFilterValues = {
   sort: string
-  material: string[]
+  color: string[]
   room: string[]
   page: number
 }

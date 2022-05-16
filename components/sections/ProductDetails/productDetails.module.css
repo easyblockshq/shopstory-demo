@@ -90,7 +90,7 @@
 }
 
 .details {
-  .material {
+  .color {
     @mixin font-body02;
     margin-top: var(--size_05);
   }

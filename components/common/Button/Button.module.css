@@ -70,13 +70,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 2px solid var(--color_black_01);
+  border: 2px solid var(--color_black_03);
   line-height: 1;
-  transition: color 200ms, border-color 200ms;
+  transition: background-color 200ms, color 200ms, border-color 200ms;
 
   &:hover {
-    color: var(--color_black_03);
-    border-color: var(--color_black_03);
+    color: var(--color_white_01);
+    border-color: var(--color_black_04);
+    background-color: var(--color_black_03);
   }
 }
 

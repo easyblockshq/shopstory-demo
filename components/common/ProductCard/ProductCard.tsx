@@ -36,13 +36,13 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
               relatedLinkClasses.push(styles.relatedProductActive)
             }
 
-            if (relatedProduct.material && relatedProduct.material?.length > 0) {
+            if (relatedProduct.color && relatedProduct.color?.length > 0) {
               return (
                 <Link href={'/products/' + relatedProduct.handle} key={i}>
                   <a className={relatedLinkClasses.join(' ')}>
                     <div
-                      className={styles.relatedMaterial}
-                      style={{ backgroundColor: getCollectionColor(relatedProduct.material[0].name)?.hex }}
+                      className={styles.relatedColor}
+                      style={{ backgroundColor: getCollectionColor(relatedProduct.color[0].name)?.hex }}
                     ></div>
                   </a>
                 </Link>

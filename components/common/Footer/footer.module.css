@@ -6,7 +6,7 @@
 
 .top {
   padding-top: var(--size_12);
-  padding-bottom: var(--size_10);
+  padding-bottom: var(--size_11);
   text-align: center;
 }
 
@@ -22,7 +22,8 @@
   max-width: 400px;
 
   input[type='email'] {
-    @mixin font-body02;
+    @mixin typography-soehne-mono;
+    font-size: 16px;
     background-color: inherit;
     border: none;
     width: 100%;
@@ -47,9 +48,8 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    padding: var(--size_05);
     padding-right: 0;
-    padding-top: var(--size_05);
-    padding-bottom: var(--size_05);
     color: var(--color_white_01);
     cursor: pointer;
     transition: color 200ms;
@@ -68,21 +68,21 @@
 }
 
 .formMessages {
-  margin-top: var(--size_09);
+  margin-top: var(--size_07);
   height: 40px;
 }
 
 .formMessages {
-  @mixin font-heading02;
+  @mixin font-body02;
   height: 40px;
 }
 
 .formError {
-  color: red;
+  color: #ff7064;
 }
 
 .formSuccess {
-  color: green;
+  color: var(--color_white_01);
 }
 
 .bottom {
