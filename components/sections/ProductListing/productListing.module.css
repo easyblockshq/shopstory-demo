@@ -142,7 +142,8 @@
 .filterColorselect {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: var(--size_07);
+  grid-column-gap: var(--size_05);
+  grid-row-gap: var(--size_08);
   @media (--sm) {
     grid-template-columns: repeat(4, 1fr);
   }

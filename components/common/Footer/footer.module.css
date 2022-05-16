@@ -38,6 +38,11 @@
     &::placeholder {
       color: var(--color_white_01);
     }
+
+    &:-webkit-autofill {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: var(--color_white_01) !important;
+    }
   }
 
   input[type='submit'] {

@@ -19,25 +19,52 @@
 }
 
 .info {
+  position: relative;
   text-align: center;
   padding: var(--size_07) var(--size_07) 0 var(--size_07);
 }
 
 .title {
   @mixin font-body02;
+  transition: opacity 200ms;
+
+  @media (--lg) {
+    .wrapperWithVariants:hover & {
+      opacity: 0;
+    }
+  }
 }
 
 .priceStandard {
   @mixin font-heading03;
   margin-top: var(--size_03);
+  transition: transform 200ms;
+
+  @media (--lg) {
+    .wrapperWithVariants:hover & {
+      transform: translateY(14px);
+    }
+  }
 }
 
 .related {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 100%;
   margin-top: var(--size_03);
-  display: grid;
   grid-auto-flow: column;
   justify-content: center;
-  grid-column-gap: 9px;
+  grid-column-gap: 6px;
+  display: grid;
+  opacity: 0;
+  transition: opacity 200ms;
+
+  @media (--lg) {
+    .wrapperWithVariants:hover & {
+      opacity: 1;
+    }
+  }
 }
 
 .relatedLink {
@@ -50,10 +77,10 @@
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-  width: 16px;
-  height: 16px;
+  width: 40px;
+  height: 40px;
   padding: var(--size_02);
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .relatedProductActive {
