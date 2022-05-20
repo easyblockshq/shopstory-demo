@@ -5,6 +5,7 @@
 import { CompilationConfig } from '@shopstory/core/dist/client/types'
 import { shopstoryRuntimeConfig } from './shopstoryRuntimeConfig'
 import { fetchProductsByIds } from '../data/shopify/fetchProductsByIds'
+import fetchProducts from '../data/shopify/fetchProducts'
 
 export const shopstoryCompilationConfig: CompilationConfig = {
   runtimeConfig: shopstoryRuntimeConfig,
@@ -20,9 +21,13 @@ export const shopstoryCompilationConfig: CompilationConfig = {
         const ret: Record<string, any> = {}
 
         const products = await fetchProductsByIds(ids)
-        products.forEach((product) => {
-          ret[product.id] = product
-        })
+        await Promise.all(
+          products.map(async (product) => {
+            const relatedTag = product.tags?.find((tag: any) => tag.startsWith('related'))
+            const relatedProducts = await fetchProducts('tag:' + relatedTag)
+            ret[product.id] = { ...product, relatedProducts }
+          })
+        )
 
         return ret
       }

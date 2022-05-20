@@ -128,14 +128,14 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
           type: 'select',
           options: [
             {
-              id: 'enabled',
-              label: 'On',
-              value: 'enabled'
-            },
-            {
               id: 'disabled',
               label: 'Off',
               value: 'disabled'
+            },
+            {
+              id: 'enabled',
+              label: 'On',
+              value: 'enabled'
             },
             {
               id: 'onHover',
