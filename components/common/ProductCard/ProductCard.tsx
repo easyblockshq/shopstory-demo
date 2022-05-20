@@ -6,17 +6,26 @@ import Link from 'next/link'
 import { Media } from '../Media/Media'
 import styles from './productCard.module.css'
 
-const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
+const ProductCard: FC<{
+  product: ShopifyProduct
+  relatedProductsMode: 'enabled' | 'disabled' | 'onHover'
+  withBackdrop: Boolean
+}> = ({ product, relatedProductsMode, withBackdrop: withBackdrop }) => {
   return (
     <div
       className={[
         styles.wrapper,
-        product.relatedProducts && product.relatedProducts?.length > 1 ? styles.wrapperWithVariants : ''
+        product.relatedProducts && product.relatedProducts?.length > 1 && relatedProductsMode === 'enabled'
+          ? styles.wrapperWithVariants
+          : '',
+        product.relatedProducts && product.relatedProducts?.length > 1 && relatedProductsMode === 'onHover'
+          ? styles.wrapperWithVariantsOnHover
+          : ''
       ].join(' ')}
     >
       <Link href={'/products/' + product.handle}>
         <a>
-          <div className={styles.thumbnail}>
+          <div className={[styles.thumbnail, withBackdrop ? styles.thumbnailWithBackdrop : ''].join(' ')}>
             {product.primaryImage ? (
               <Media
                 media={product.primaryImage}
@@ -28,7 +37,9 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
             )}
           </div>
           <div className={styles.info}>
-            {product.relatedProducts && product.relatedProducts?.length > 1 && (
+            <h2 className={styles.title}>{product.title}</h2>
+            {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}
+            {relatedProductsMode !== 'disabled' && product.relatedProducts && product.relatedProducts?.length > 1 && (
               <div className={styles.related}>
                 {product.relatedProducts.map((relatedProduct, i) => {
                   let relatedLinkClasses = [styles.relatedProduct]
@@ -52,8 +63,6 @@ const ProductCard: FC<{ product: ShopifyProduct }> = ({ product }) => {
                 })}
               </div>
             )}
-            <h2 className={styles.title}>{product.title}</h2>
-            {product.price && <p className={styles.priceStandard}>{formatPrice(product.price)}</p>}
           </div>
         </a>
       </Link>

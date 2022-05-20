@@ -121,6 +121,33 @@ const shopstoryRuntimeConfig: RuntimeConfig = {
         {
           prop: 'product',
           type: 'product'
+        },
+        {
+          prop: 'relatedProductsMode',
+          label: 'Related products - mode',
+          type: 'select',
+          options: [
+            {
+              id: 'enabled',
+              label: 'On',
+              value: 'enabled'
+            },
+            {
+              id: 'disabled',
+              label: 'Off',
+              value: 'disabled'
+            },
+            {
+              id: 'onHover',
+              label: 'On hover',
+              value: 'onHover'
+            }
+          ]
+        },
+        {
+          prop: 'withBackdrop',
+          label: 'Backdrop',
+          type: 'boolean'
         }
       ]
     },

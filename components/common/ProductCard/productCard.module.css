@@ -4,8 +4,11 @@
 
 .thumbnail {
   position: relative;
-  background-color: var(--color_beige_01);
   padding-bottom: 70%;
+
+  &.thumbnailWithBackdrop {
+    background-color: var(--color_beige_01);
+  }
 }
 
 .placeholder {
@@ -27,41 +30,34 @@
 .title {
   @mixin font-body02;
   transition: opacity 200ms;
-
-  @media (--lg) {
-    .wrapperWithVariants:hover & {
-      opacity: 0;
-    }
-  }
 }
 
 .priceStandard {
   @mixin font-heading03;
   margin-top: var(--size_03);
-  transition: transform 200ms;
-
-  @media (--lg) {
-    .wrapperWithVariants:hover & {
-      transform: translateY(14px);
-    }
-  }
 }
 
 .related {
-  position: absolute;
-  left: 0;
-  top: 6px;
+  position: relative;
   width: 100%;
-  margin-top: var(--size_03);
+  margin-top: var(--size_05);
   grid-auto-flow: column;
   justify-content: center;
   grid-column-gap: 6px;
-  display: grid;
-  opacity: 0;
-  transition: opacity 200ms;
+  display: none;
 
   @media (--lg) {
-    .wrapperWithVariants:hover & {
+    .wrapperWithVariants & {
+      display: grid;
+    }
+
+    .wrapperWithVariantsOnHover & {
+      opacity: 0;
+      transition: opacity 200ms;
+      display: grid;
+    }
+
+    .wrapperWithVariantsOnHover:hover & {
       opacity: 1;
     }
   }

@@ -114,7 +114,9 @@ const ProductListing: FC<PLPProps> = (props) => {
   }
 
   const productCards = collection
-    ? collection.products.map((product, i) => <ProductCard product={product} key={i} />)
+    ? collection.products.map((product, i) => (
+        <ProductCard product={product} relatedProductsMode={'onHover'} withBackdrop={true} key={i} />
+      ))
     : []
 
   return (
