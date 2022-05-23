@@ -29,6 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta key="robots" name="robots" content="noindex,nofollow" />
+        <meta key="googlebot" name="googlebot" content="noindex,nofollow" />
       </Head>
 
       {!pageProps.noHeaderAndFooter && (
