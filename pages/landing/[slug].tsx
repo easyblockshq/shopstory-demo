@@ -4,10 +4,9 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import compile from '@shopstory/core/dist/client/compile'
 import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
 import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
-import { shopstoryRuntimeConfig } from '../../shopstory/shopstoryRuntimeConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
-import { CompilationOutput } from '@shopstory/core/dist/client/types'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
+import { CompilationOutput } from '@shopstory/core/dist/client/types'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
 import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
 
@@ -25,7 +24,7 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
 
       <PageWrapper>
         {/* Below we're simply rendering Shopstory compiled content */}
-        <Shopstory runtimeConfig={shopstoryRuntimeConfig} src={props.shopstoryCompiledContent} />
+        <Shopstory src={props.shopstoryCompiledContent} />
       </PageWrapper>
     </>
   )
