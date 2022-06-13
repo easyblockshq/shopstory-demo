@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { setAppElement } from 'react-modal'
 import LoaderSection from '../components/sections/LoaderSection/LoaderSection'
 import { Toast } from '../components/common/Toast/Toast'
+import { MyShopstoryProvider } from '../shopstory/ShopstoryProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -25,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 
   return (
-    <>
+    <MyShopstoryProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -45,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <div id={'modalContainer'} />
       <div id={'toastContainer'} />
-    </>
+    </MyShopstoryProvider>
   )
 }
 
