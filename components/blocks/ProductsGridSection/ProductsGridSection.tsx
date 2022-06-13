@@ -14,8 +14,8 @@ export const ProductsGridSection: React.FC<ProductsGridSectionProps> = (props) =
       <div className={styles.title}>{props.title}</div>
       <br />
       <div className={styles.container}>
-        {products.map((product) => (
-          <ProductCard product={product} relatedProductsMode={'disabled'} withBackdrop={false} />
+        {products.map((product, index) => (
+          <ProductCard key={index} product={product} relatedProductsMode={'disabled'} withBackdrop={false} />
         ))}
       </div>
     </div>

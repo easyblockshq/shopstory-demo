@@ -8,6 +8,8 @@ const ShopstoryButton = React.forwardRef(({ label, ...restProps }: any, ref) => 
   return <Button {...restProps}>{label}</Button>
 })
 
+ShopstoryButton.displayName = 'ShopstoryButton'
+
 /**
  * Shopstory allows for custom "link actions". Here we define a link wrapper for next/link.
  */
