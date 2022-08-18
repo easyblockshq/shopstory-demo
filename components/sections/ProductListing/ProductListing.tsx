@@ -135,7 +135,7 @@ const ProductListing: FC<PLPProps> = (props) => {
       </div>
 
       <div className={styles.productGrid}>
-        <ShopstoryGrid cards={productCards} src={props.shopstoryCompiledContent} />
+        <ShopstoryGrid cards={productCards} {...props.shopstoryCompiledContent} />
       </div>
 
       <Modal

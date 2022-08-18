@@ -5,13 +5,13 @@ import compile from '@shopstory/core/dist/client/compile'
 import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
 import { shopstoryCompilationConfig } from '../shopstory/shopstoryCompilationConfig'
 import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParams'
-import { CompilationOutput } from '@shopstory/core/dist/client/types'
+import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
 import { fetchHomepageEntry } from '../data/contentful/fetchHomepageEntry'
 import { PageWrapper } from '../components/common/PageWrapper/PageWrapper'
 
 type HomeProps = {
-  shopstoryCompiledContent: CompilationOutput
+  shopstoryCompiledContent: ShopstoryCompileOutput
 }
 
 const Home: NextPage<HomeProps> = (props) => {
@@ -22,7 +22,7 @@ const Home: NextPage<HomeProps> = (props) => {
       </Head>
 
       <PageWrapper>
-        <Shopstory src={props.shopstoryCompiledContent} />
+        <Shopstory {...props.shopstoryCompiledContent} />
       </PageWrapper>
     </>
   )

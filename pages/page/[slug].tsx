@@ -35,7 +35,7 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
           } else if (block.type === 'blockTwoColumns') {
             return <TwoColumnsSection {...block.data} />
           } else if (block.type === 'shopstoryBlock') {
-            return <Shopstory src={block.shopstoryCompiledContent} />
+            return <Shopstory {...block.shopstoryCompiledContent} />
           } else {
             throw new Error(`unknown block type: ${block.sys.contentType.sys.id}`)
           }

@@ -6,12 +6,12 @@ import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/c
 import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
-import { CompilationOutput } from '@shopstory/core/dist/client/types'
+import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
 import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
 
 type LandingPageProps = {
-  shopstoryCompiledContent: CompilationOutput
+  shopstoryCompiledContent: ShopstoryCompileOutput
 }
 
 const LandingPage: NextPage<LandingPageProps> = (props) => {
@@ -24,7 +24,7 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
 
       <PageWrapper>
         {/* Below we're simply rendering Shopstory compiled content */}
-        <Shopstory src={props.shopstoryCompiledContent} />
+        <Shopstory {...props.shopstoryCompiledContent} />
       </PageWrapper>
     </>
   )
