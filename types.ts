@@ -1,4 +1,4 @@
-import { CompilationOutput } from '@shopstory/core/dist/client/types'
+import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
 
 export type Path = {
   params: {
@@ -86,7 +86,7 @@ export type PLPProps = {
     max: number
   }
   numberOfItems: number
-  shopstoryCompiledContent: CompilationOutput
+  shopstoryCompiledContent: ShopstoryCompileOutput
 }
 
 export type ImageObject = {
