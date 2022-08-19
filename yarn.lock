@@ -582,10 +582,10 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.0.tgz"
   integrity sha512-JLo+Y592QzIE+q7Dl2pMUtt4q8SKYI5jDrZxrozEQxnGVOyYE+GWK9eLkwTaeN9DDctlaRAQ3TBmzZ1qdLE30A==
 
-"@shopstory/core@0.7.2-alpha.8":
-  version "0.7.2-alpha.8"
-  resolved "https://registry.npmjs.org/@shopstory/core/-/core-0.7.2-alpha.8.tgz"
-  integrity sha512-xsWLkIZi9vKfNqQupmBnRqjzBIGbiyRGrhVPmMKTJykFw0JZ8oRtyuUJwlwEMjtoTRfJFpjhlGA/E5AT9KzNXQ==
+"@shopstory/core@0.7.2-alpha.9":
+  version "0.7.2-alpha.9"
+  resolved "https://registry.yarnpkg.com/@shopstory/core/-/core-0.7.2-alpha.9.tgz#96524c276a103a3f9acfd8ce40f34d11997183a3"
+  integrity sha512-rQQvvntWo0qtjGXQ3mBlV3A4s3J6uGO9a9vUbFJ922A/PtNZb1nBSn7GzM5SuIsYgsrWYrpuS8XLSjMKhMkM0Q==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@contentful/app-sdk" "^4.3.0"
@@ -596,7 +596,7 @@
     "@emotion/styled" "^11.6.0"
     "@popperjs/core" "^2.11.5"
     "@react-aria/tooltip" "^3.1.8"
-    "@shopstory/design-system" "^0.7.2-alpha.8"
+    "@shopstory/design-system" "^0.7.2-alpha.9"
     "@stitches/core" "^1.2.5"
     "@vimeo/player" "^2.16.4"
     contentful "^9.1.4"
@@ -618,10 +618,10 @@
     styled-components "^5.3.3"
     tslib "^2.3.1"
 
-"@shopstory/design-system@^0.7.2-alpha.8":
-  version "0.7.2-alpha.8"
-  resolved "https://registry.npmjs.org/@shopstory/design-system/-/design-system-0.7.2-alpha.8.tgz"
-  integrity sha512-W5Trm7TA+gOiWkTxp4UHKu6aAwdyUg6Ca5DGp5F9oGfxUemEZw50J7M7T4713c5lf0GMpOSgHqhTyDMZG+lvJA==
+"@shopstory/design-system@^0.7.2-alpha.9":
+  version "0.7.2-alpha.9"
+  resolved "https://registry.yarnpkg.com/@shopstory/design-system/-/design-system-0.7.2-alpha.9.tgz#8629eb3167ff795452e5d29fa2f774dd325e98e8"
+  integrity sha512-uCDLl58d8GCh54JUbYFrmWifsaVxfUzccOgK9WzTtYtpk1qQMAcV8Hi8LAcMmialX7pspjQAmlEtY01viCn9xA==
   dependencies:
     react-modal "^3.12.1"
 
