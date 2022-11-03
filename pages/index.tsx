@@ -1,17 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import compile from '@shopstory/core/dist/client/compile'
-import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
-import { shopstoryCompilationConfig } from '../shopstory/shopstoryCompilationConfig'
+import { GetStaticProps } from 'next'
+import contentfulClientSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { shopstoryConfig } from '../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParams'
-import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
+import { Metadata, RenderableContentPiece } from '@shopstory/core/dist/client/types'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
 import { fetchHomepageEntry } from '../data/contentful/fetchHomepageEntry'
 import { PageWrapper } from '../components/common/PageWrapper/PageWrapper'
+import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { DemoShopstoryProvider } from '../shopstory/ShopstoryProvider'
 
 type HomeProps = {
-  shopstoryCompiledContent: ShopstoryCompileOutput
+  content: RenderableContentPiece
+  meta: Metadata
 }
 
 const Home: NextPage<HomeProps> = (props) => {
@@ -22,7 +24,9 @@ const Home: NextPage<HomeProps> = (props) => {
       </Head>
 
       <PageWrapper>
-        <Shopstory {...props.shopstoryCompiledContent} />
+        <DemoShopstoryProvider meta={props.meta}>
+          <Shopstory content={props.content} />
+        </DemoShopstoryProvider>
       </PageWrapper>
     </>
   )
@@ -37,17 +41,19 @@ export const getStaticProps: GetStaticProps<HomeProps, { slug: string }> = async
     return { notFound: true }
   }
 
-  const shopstoryCompiledContent = await compile(
-    entry.fields.shopstory,
-    shopstoryCompilationConfig,
-    contentfulCompilationSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
+  const shopstoryClient = new ShopstoryClient(
+    shopstoryConfig,
+    contentfulClientSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
     {
       locale
     }
   )
 
+  const content = shopstoryClient.add(entry.fields.shopstory)
+  const meta = await shopstoryClient.fetch()
+
   return {
-    props: { shopstoryCompiledContent },
+    props: { content, meta },
     revalidate: 10
   }
 }

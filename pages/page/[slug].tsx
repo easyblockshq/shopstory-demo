@@ -8,11 +8,12 @@ import { ProductsGridSection } from '../../components/blocks/ProductsGridSection
 import fetchCollectionByHandle from '../../data/shopify/fetchCollectionByHandle'
 import { fetchPageEntry } from '../../data/contentful/fetchPageEntry'
 import { TwoColumnsSection } from '../../components/blocks/TwoColumnsSection/TwoColumnsSection'
-import compile from '@shopstory/core/dist/client/compile'
-import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
-import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
+import contentfulClientSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
+import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { DemoShopstoryProvider } from '../../shopstory/ShopstoryProvider'
 
 type LandingPageProps = {
   blocks: any[]
@@ -35,7 +36,11 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
           } else if (block.type === 'blockTwoColumns') {
             return <TwoColumnsSection {...block.data} />
           } else if (block.type === 'shopstoryBlock') {
-            return <Shopstory {...block.shopstoryCompiledContent} />
+            return (
+              <DemoShopstoryProvider meta={block.meta}>
+                <Shopstory content={block.content} />
+              </DemoShopstoryProvider>
+            )
           } else {
             throw new Error(`unknown block type: ${block.sys.contentType.sys.id}`)
           }
@@ -113,18 +118,21 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
           }
         }
       } else if (type === 'shopstoryBlock') {
-        const shopstoryCompiledContent = await compile(
-          block.fields.config,
-          shopstoryCompilationConfig,
-          contentfulCompilationSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
+        const shopstoryClient = new ShopstoryClient(
+          shopstoryConfig,
+          contentfulClientSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
           {
             locale
           }
         )
 
+        const content = shopstoryClient.add(block.fields.config)
+        const meta = await shopstoryClient.fetch()
+
         return {
           type,
-          shopstoryCompiledContent
+          content,
+          meta
         }
       } else {
         throw new Error(`uknown block type: ${type}`)

@@ -1,17 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import compile from '@shopstory/core/dist/client/compile'
-import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/compilationSetup'
-import { shopstoryCompilationConfig } from '../../shopstory/shopstoryCompilationConfig'
+import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 import Shopstory from '@shopstory/core/dist/client/Shopstory'
-import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
+import { Metadata, RenderableContentPiece } from '@shopstory/core/dist/client/types'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
 import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
+import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { DemoShopstoryProvider } from '../../shopstory/ShopstoryProvider'
 
 type LandingPageProps = {
-  shopstoryCompiledContent: ShopstoryCompileOutput
+  content: RenderableContentPiece
+  meta: Metadata
 }
 
 const LandingPage: NextPage<LandingPageProps> = (props) => {
@@ -24,7 +26,9 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
 
       <PageWrapper>
         {/* Below we're simply rendering Shopstory compiled content */}
-        <Shopstory {...props.shopstoryCompiledContent} />
+        <DemoShopstoryProvider meta={props.meta}>
+          <Shopstory content={props.content} />
+        </DemoShopstoryProvider>
       </PageWrapper>
     </>
   )
@@ -53,17 +57,19 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
    *
    * This is a crucial step to integrate Shopstory but it is very simple. All you need to do is pass Shopstory-managed JSON field to the Shopstory compilation function. The returned object is "renderable".
    */
-  const shopstoryCompiledContent = await compile(
-    entry.fields.shopstory,
-    shopstoryCompilationConfig,
+  const shopstoryClient = new ShopstoryClient(
+    shopstoryConfig,
     contentfulCompilationSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
     {
       locale
     }
   )
 
+  const content = shopstoryClient.add(entry.fields.shopstory)
+  const meta = await shopstoryClient.fetch()
+
   return {
-    props: { shopstoryCompiledContent },
+    props: { content, meta },
     revalidate: 10
   }
 }

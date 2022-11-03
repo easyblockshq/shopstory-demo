@@ -1,9 +1,11 @@
 import React from 'react'
 
 import Launcher from '@shopstory/core/dist/client/Launcher'
-import ContentfulCMS from '@shopstory/core/dist/client/contentful/cms'
+import ContentfulCMS from '@shopstory/core/dist/client/contentful/editorSetup'
 import { shopstoryEditorConfig } from '../shopstory/shopstoryEditorConfig'
 import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParams'
+import { shopstoryConfig } from '../shopstory/shopstoryConfig'
+import { DemoShopstoryProvider } from '../shopstory/ShopstoryProvider'
 
 /**
  * This is Shopstory "canvas page".
@@ -12,7 +14,15 @@ import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParam
  *
  */
 function ShopstoryEditorPage() {
-  return <Launcher editorConfig={shopstoryEditorConfig} cms={ContentfulCMS(shopstoryContentfulParams)} />
+  return (
+    <DemoShopstoryProvider>
+      <Launcher
+        editorConfig={shopstoryEditorConfig}
+        config={shopstoryConfig}
+        cms={ContentfulCMS(shopstoryContentfulParams)}
+      />
+    </DemoShopstoryProvider>
+  )
 }
 
 export async function getStaticProps() {
