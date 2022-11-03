@@ -1,4 +1,4 @@
-import { Metadata, RenderableContentPiece } from '@shopstory/core/dist/client/types'
+import { Metadata, RenderableContentPiece } from '@shopstory/core'
 
 export type Path = {
   params: {

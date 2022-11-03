@@ -2,8 +2,8 @@
  * Shopstory Editor config
  */
 
-import { EditorConfig } from '@shopstory/core/dist/client/types'
-import { shopifyProductPickerField } from '@shopstory/core/dist/client/shopify'
+import { EditorConfig } from '@shopstory/core'
+import { shopifyProductPickerField } from '@shopstory/core/shopify'
 
 export const shopstoryEditorConfig: EditorConfig = {
   widgets: {

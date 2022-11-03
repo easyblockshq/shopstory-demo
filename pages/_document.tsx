@@ -1,7 +1,7 @@
 import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document'
 import React from 'react'
 
-import { shopstoryGetStyleTag } from '@shopstory/core/dist/client/Shopstory'
+import { shopstoryGetStyleTag } from '@shopstory/core/react'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

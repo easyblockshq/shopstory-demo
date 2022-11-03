@@ -2,14 +2,13 @@
  * Shopstory config.
  */
 
-import { Config } from '@shopstory/core/dist/client/types'
+import { Config, FetchResourcesOutput } from '@shopstory/core'
 import { fetchProductsByIds } from '../data/shopify/fetchProductsByIds'
 import fetchProducts from '../data/shopify/fetchProducts'
-import { FetchResourcesOutput } from '@shopstory/core/dist/core/resources/syncResources'
 
 export const shopstoryConfig: Config = {
   spaceId: 'shopstory-demo',
-  accessToken: process.env.NEXT_PUBLIC_SHOPSTORY_ACCESS_TOKEN,
+  accessToken: process.env.SHOPSTORY_ACCESS_TOKEN,
   actions: [],
 
   /**

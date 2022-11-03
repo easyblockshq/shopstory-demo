@@ -8,11 +8,11 @@ import { ProductsGridSection } from '../../components/blocks/ProductsGridSection
 import fetchCollectionByHandle from '../../data/shopify/fetchCollectionByHandle'
 import { fetchPageEntry } from '../../data/contentful/fetchPageEntry'
 import { TwoColumnsSection } from '../../components/blocks/TwoColumnsSection/TwoColumnsSection'
-import contentfulClientSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
-import Shopstory from '@shopstory/core/dist/client/Shopstory'
-import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { Shopstory } from '@shopstory/core/react'
+import { ShopstoryClient } from '@shopstory/core/client'
 import { DemoShopstoryProvider } from '../../shopstory/ShopstoryProvider'
 
 type LandingPageProps = {
@@ -37,8 +37,8 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
             return <TwoColumnsSection {...block.data} />
           } else if (block.type === 'shopstoryBlock') {
             return (
-              <DemoShopstoryProvider meta={block.meta}>
-                <Shopstory content={block.content} />
+              <DemoShopstoryProvider>
+                <Shopstory content={block.content} meta={block.meta} />
               </DemoShopstoryProvider>
             )
           } else {

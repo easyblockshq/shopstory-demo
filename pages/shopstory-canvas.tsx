@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Launcher from '@shopstory/core/dist/client/Launcher'
-import ContentfulCMS from '@shopstory/core/dist/client/contentful/editorSetup'
+import { Canvas } from '@shopstory/core/react'
+import { contentfulEditorSetup } from '@shopstory/core/contentful/editorSetup'
 import { shopstoryEditorConfig } from '../shopstory/shopstoryEditorConfig'
 import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParams'
 import { shopstoryConfig } from '../shopstory/shopstoryConfig'
@@ -16,10 +16,10 @@ import { DemoShopstoryProvider } from '../shopstory/ShopstoryProvider'
 function ShopstoryEditorPage() {
   return (
     <DemoShopstoryProvider>
-      <Launcher
+      <Canvas
         editorConfig={shopstoryEditorConfig}
         config={shopstoryConfig}
-        cms={ContentfulCMS(shopstoryContentfulParams)}
+        cms={contentfulEditorSetup(shopstoryContentfulParams)}
       />
     </DemoShopstoryProvider>
   )

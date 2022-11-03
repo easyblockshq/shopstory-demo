@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetStaticProps, GetStaticPaths } from 'next'
-import contentfulCompilationSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
-import Shopstory from '@shopstory/core/dist/client/Shopstory'
-import { Metadata, RenderableContentPiece } from '@shopstory/core/dist/client/types'
+import { Shopstory } from '@shopstory/core/react'
+import { Metadata, RenderableContentPiece } from '@shopstory/core'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
 import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
-import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { ShopstoryClient } from '@shopstory/core/client'
 import { DemoShopstoryProvider } from '../../shopstory/ShopstoryProvider'
 
 type LandingPageProps = {
@@ -26,8 +26,8 @@ const LandingPage: NextPage<LandingPageProps> = (props) => {
 
       <PageWrapper>
         {/* Below we're simply rendering Shopstory compiled content */}
-        <DemoShopstoryProvider meta={props.meta}>
-          <Shopstory content={props.content} />
+        <DemoShopstoryProvider>
+          <Shopstory content={props.content} meta={props.meta} />
         </DemoShopstoryProvider>
       </PageWrapper>
     </>
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
    */
   const shopstoryClient = new ShopstoryClient(
     shopstoryConfig,
-    contentfulCompilationSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
+    contentfulClientSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
     {
       locale
     }

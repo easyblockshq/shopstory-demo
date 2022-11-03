@@ -17,7 +17,7 @@ import { ToggleButton } from '../../common/ToggleButton/ToggleButton'
 import { ToggleColorButton } from '../../common/ToggleColorButton/ToggleColorButton'
 import { ToggleRadioButton } from '../../common/ToggleRadioButton/ToggleRadioButton'
 import CloseIcon from '../../icons/CloseIcon'
-import { ShopstoryGrid } from '@shopstory/core/dist/client/Shopstory'
+import { ShopstoryGrid } from '@shopstory/core/react'
 import Link from 'next/link'
 import { DemoShopstoryProvider } from '../../../shopstory/ShopstoryProvider'
 
@@ -136,8 +136,8 @@ const ProductListing: FC<PLPProps> = (props) => {
       </div>
 
       <div className={styles.productGrid}>
-        <DemoShopstoryProvider meta={props.meta}>
-          <ShopstoryGrid cards={productCards} content={props.renderableContent} />
+        <DemoShopstoryProvider>
+          <ShopstoryGrid cards={productCards} content={props.renderableContent} meta={props.meta} />
         </DemoShopstoryProvider>
       </div>
 
