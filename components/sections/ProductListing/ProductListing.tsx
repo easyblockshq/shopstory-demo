@@ -19,6 +19,7 @@ import { ToggleRadioButton } from '../../common/ToggleRadioButton/ToggleRadioBut
 import CloseIcon from '../../icons/CloseIcon'
 import { ShopstoryGrid } from '@shopstory/core/dist/client/Shopstory'
 import Link from 'next/link'
+import { DemoShopstoryProvider } from '../../../shopstory/ShopstoryProvider'
 
 const getActiveFiltersCount = (activeFilters: any) => {
   let counter = 0
@@ -135,7 +136,9 @@ const ProductListing: FC<PLPProps> = (props) => {
       </div>
 
       <div className={styles.productGrid}>
-        <ShopstoryGrid cards={productCards} {...props.shopstoryCompiledContent} />
+        <DemoShopstoryProvider meta={props.meta}>
+          <ShopstoryGrid cards={productCards} content={props.renderableContent} />
+        </DemoShopstoryProvider>
       </div>
 
       <Modal

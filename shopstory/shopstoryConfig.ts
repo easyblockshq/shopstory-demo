@@ -1,15 +1,15 @@
 /**
- * Shopstory compilation config.
+ * Shopstory config.
  */
 
-import { CompilationConfig } from '@shopstory/core/dist/client/types'
+import { Config } from '@shopstory/core/dist/client/types'
 import { fetchProductsByIds } from '../data/shopify/fetchProductsByIds'
 import fetchProducts from '../data/shopify/fetchProducts'
-import ProductCard from '../components/common/ProductCard/ProductCard'
+import { FetchResourcesOutput } from '@shopstory/core/dist/core/resources/syncResources'
 
-export const shopstoryCompilationConfig: CompilationConfig = {
+export const shopstoryConfig: Config = {
   spaceId: 'shopstory-demo',
-
+  accessToken: process.env.SHOPSTORY_ACCESS_TOKEN,
   actions: [],
 
   /**
@@ -84,7 +84,8 @@ export const shopstoryCompilationConfig: CompilationConfig = {
          */
         {
           prop: 'product',
-          type: 'product'
+          type: 'resource',
+          resourceType: 'product'
         },
         {
           prop: 'relatedProductsMode',
@@ -92,17 +93,14 @@ export const shopstoryCompilationConfig: CompilationConfig = {
           type: 'select',
           options: [
             {
-              id: 'disabled',
               label: 'Off',
               value: 'disabled'
             },
             {
-              id: 'enabled',
               label: 'On',
               value: 'enabled'
             },
             {
-              id: 'onHover',
               label: 'On hover',
               value: 'onHover'
             }
@@ -339,24 +337,32 @@ export const shopstoryCompilationConfig: CompilationConfig = {
 
   types: {
     /**
-     * In shopstoryRuntimeConfig we used "product" type in a ProductCard schema. This is not Shopstory-defined type, so we must pass the instruction how to fetch it.
+     * In Shopstory config we used "resource" type for product in a ProductCard schema. This is not Shopstory-defined type, so we must pass the instruction how to fetch it.
      *
-     * Below we're defining "fetch function" that transforms product ids to the product objects necessary for ProductCard. It is totally custom and up to the developers.
+     * Below we're defining "fetch function" that transforms unresolved product resources to the product objects necessary for ProductCard. It is totally custom and up to the developers.
      */
     product: {
-      fetch: async (ids: string[]) => {
-        const ret: Record<string, any> = {}
-
+      fetch: async (resources) => {
+        const ids = resources.map((resource) => resource.id)
         const products = await fetchProductsByIds(ids)
+        const result: Array<FetchResourcesOutput> = []
+
         await Promise.all(
           products.map(async (product) => {
             const relatedTag = product.tags?.find((tag: any) => tag.startsWith('related'))
             const relatedProducts = await fetchProducts('tag:' + relatedTag)
-            ret[product.id] = { ...product, relatedProducts }
+
+            result.push({
+              ...resources.find((resource) => resource.id === product.id)!,
+              value: {
+                ...product,
+                relatedProducts
+              }
+            })
           })
         )
 
-        return ret
+        return result
       }
     }
   }

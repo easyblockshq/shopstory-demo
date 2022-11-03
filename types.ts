@@ -1,4 +1,4 @@
-import { ShopstoryCompileOutput } from '@shopstory/core/dist/client/types'
+import { Metadata, RenderableContentPiece } from '@shopstory/core/dist/client/types'
 
 export type Path = {
   params: {
@@ -86,7 +86,8 @@ export type PLPProps = {
     max: number
   }
   numberOfItems: number
-  shopstoryCompiledContent: ShopstoryCompileOutput
+  renderableContent: RenderableContentPiece
+  meta: Metadata
 }
 
 export type ImageObject = {
