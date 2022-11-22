@@ -582,10 +582,10 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.0.tgz"
   integrity sha512-JLo+Y592QzIE+q7Dl2pMUtt4q8SKYI5jDrZxrozEQxnGVOyYE+GWK9eLkwTaeN9DDctlaRAQ3TBmzZ1qdLE30A==
 
-"@shopstory/core@0.7.2-alpha.9":
-  version "0.7.2-alpha.9"
-  resolved "https://registry.yarnpkg.com/@shopstory/core/-/core-0.7.2-alpha.9.tgz#96524c276a103a3f9acfd8ce40f34d11997183a3"
-  integrity sha512-rQQvvntWo0qtjGXQ3mBlV3A4s3J6uGO9a9vUbFJ922A/PtNZb1nBSn7GzM5SuIsYgsrWYrpuS8XLSjMKhMkM0Q==
+"@shopstory/core@0.8.1-alpha.9":
+  version "0.8.1-alpha.9"
+  resolved "https://registry.yarnpkg.com/@shopstory/core/-/core-0.8.1-alpha.9.tgz#3c79b85988015b4d20a831f6624d15a02748f2f3"
+  integrity sha512-omtKZOkywDDidgALn+1u9y3/IrDEO10XavHYW9E2RUtGs1uNze+AQkNPpkZwYuXf87agf+aYhBpL3bRn4MKwGw==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@contentful/app-sdk" "^4.3.0"
@@ -596,12 +596,13 @@
     "@emotion/styled" "^11.6.0"
     "@popperjs/core" "^2.11.5"
     "@react-aria/tooltip" "^3.1.8"
-    "@shopstory/design-system" "^0.7.2-alpha.9"
+    "@shopstory/design-system" "^0.8.0-alpha.12"
     "@stitches/core" "^1.2.5"
     "@vimeo/player" "^2.16.4"
     contentful "^9.1.4"
     contentful-management "^7.45.0"
     contentstack "^3.15.3"
+    crypto-js "^4.1.1"
     dc-delivery-sdk-js "^0.11.0"
     dc-extensions-sdk "^2.1.0"
     graphql-request "^3.4.0"
@@ -617,11 +618,12 @@
     slate-react "0.77.2"
     styled-components "^5.3.3"
     tslib "^2.3.1"
+    type-fest "^3.0.0"
 
-"@shopstory/design-system@^0.7.2-alpha.9":
-  version "0.7.2-alpha.9"
-  resolved "https://registry.yarnpkg.com/@shopstory/design-system/-/design-system-0.7.2-alpha.9.tgz#8629eb3167ff795452e5d29fa2f774dd325e98e8"
-  integrity sha512-uCDLl58d8GCh54JUbYFrmWifsaVxfUzccOgK9WzTtYtpk1qQMAcV8Hi8LAcMmialX7pspjQAmlEtY01viCn9xA==
+"@shopstory/design-system@^0.8.0-alpha.12":
+  version "0.8.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@shopstory/design-system/-/design-system-0.8.0-alpha.12.tgz#83226369d06701d5bb5016c26621b8e5d83515f4"
+  integrity sha512-wKkWq2bnKYeiPo4cW0wO6ZrwGOwEWGfUzRFPcr/DnJcDaDo6s2ejjESUoIk0MeENeLmwIO/+GerRHTPXVNm/bw==
   dependencies:
     react-modal "^3.12.1"
 
@@ -1199,6 +1201,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 css-blank-pseudo@^3.0.3:
   version "3.0.3"
@@ -3453,10 +3460,15 @@ type-fest@^2.5.3:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.12.2.tgz"
   integrity sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==
 
-typescript@4.6.2:
-  version "4.6.2"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.6.2.tgz"
-  integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
+type-fest@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-3.2.0.tgz#2c8b49e775d9e314a73ea6fcee0b2e8549d5f886"
+  integrity sha512-Il3wdLRzWvbAEtocgxGQA9YOoRVeVUGOMBtel5LdEpNeEAol6GJTLw8GbX6Z8EIMfvfhoOXs2bwOijtAZdK5og==
+
+typescript@4.9.3:
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"

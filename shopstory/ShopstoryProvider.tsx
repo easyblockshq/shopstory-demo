@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Button } from '../components/common/Button/Button'
 import Link from 'next/link'
 import ProductCard from '../components/common/ProductCard/ProductCard'
-import { ShopstoryProvider } from '@shopstory/core/dist/client/Shopstory'
-import { Metadata } from '@shopstory/core/dist/types'
+import { ShopstoryProvider } from '@shopstory/core/react'
 
 const ShopstoryButton = React.forwardRef(
   ({ label, traceId, traceClicks, traceImpressions, ...restProps }: any, ref) => {
@@ -25,10 +24,10 @@ function NextLinkProvider({ Component, componentProps, values }: any) {
 }
 
 type MyShopstoryProviderProps = {
-  meta?: Metadata
+  children: ReactNode
 }
 
-export const DemoShopstoryProvider: React.FC<MyShopstoryProviderProps> = ({ children, meta }) => {
+export const DemoShopstoryProvider: React.FC<MyShopstoryProviderProps> = ({ children }) => {
   return (
     <ShopstoryProvider
       components={{
@@ -38,7 +37,6 @@ export const DemoShopstoryProvider: React.FC<MyShopstoryProviderProps> = ({ chil
       links={{
         MyLink: NextLinkProvider
       }}
-      meta={meta}
     >
       {children}
     </ShopstoryProvider>

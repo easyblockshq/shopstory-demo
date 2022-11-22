@@ -1,4 +1,4 @@
-import { ContentfulParams } from '@shopstory/core/dist/client/contentful/types'
+import { ContentfulParams } from '@shopstory/core/contentful'
 import { getContentfulConfiguration } from '../utils/getContentfulConfiguration'
 
 export const shopstoryContentfulParams: ContentfulParams = {

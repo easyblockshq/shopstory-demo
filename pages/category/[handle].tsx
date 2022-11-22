@@ -7,10 +7,10 @@ import { PLPProps } from '../../types'
 import { decomposeHandle } from '../../utils/collectionsHandle'
 import { fetchCollectionEntry } from '../../data/contentful/fetchCollectionEntry'
 
-import contentfulClientSetup from '@shopstory/core/dist/client/contentful/clientSetup'
+import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
-import { ShopstoryClient } from '@shopstory/core/dist/client/ShopstoryClient'
+import { ShopstoryClient } from '@shopstory/core/client'
 
 const Page: NextPage<PLPProps> = (props) => {
   return (
