@@ -8,7 +8,7 @@ import fetchProducts from '../data/shopify/fetchProducts'
 
 export const shopstoryConfig: Config = {
   spaceId: 'shopstory-demo',
-  accessToken: process.env.SHOPSTORY_ACCESS_TOKEN,
+  accessToken: process.env.NEXT_PUBLIC_SHOPSTORY_ACCESS_TOKEN,
   actions: [],
 
   /**
