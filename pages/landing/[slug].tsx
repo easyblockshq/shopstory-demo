@@ -1,18 +1,16 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
 import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 import { Shopstory } from '@shopstory/core/react'
-import { Metadata, RenderableContentPiece } from '@shopstory/core'
+import { Metadata, RenderableContent } from '@shopstory/core'
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper'
 import { fetchLandingPageEntry } from '../../data/contentful/fetchLandingPageEntry'
 import { ShopstoryClient } from '@shopstory/core/client'
 import { DemoShopstoryProvider } from '../../shopstory/ShopstoryProvider'
 
 type LandingPageProps = {
-  content: RenderableContentPiece
+  content: RenderableContent
   meta: Metadata
 }
 
@@ -57,16 +55,15 @@ export const getStaticProps: GetStaticProps<LandingPageProps, { slug: string }> 
    *
    * This is a crucial step to integrate Shopstory but it is very simple. All you need to do is pass Shopstory-managed JSON field to the Shopstory compilation function. The returned object is "renderable".
    */
-  const shopstoryClient = new ShopstoryClient(
-    shopstoryConfig,
-    contentfulClientSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
-    {
-      locale
+  const shopstoryClient = new ShopstoryClient(shopstoryConfig, {
+    locale,
+    contentful: {
+      preview: true
     }
-  )
+  })
 
   const content = shopstoryClient.add(entry.fields.shopstory)
-  const meta = await shopstoryClient.fetch()
+  const meta = await shopstoryClient.build()
 
   return {
     props: { content, meta },

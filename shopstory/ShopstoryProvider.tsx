@@ -31,7 +31,9 @@ export const DemoShopstoryProvider: React.FC<MyShopstoryProviderProps> = ({ chil
   return (
     <ShopstoryProvider
       components={{
-        ProductCard,
+        ProductCard
+      }}
+      buttons={{
         Button: ShopstoryButton
       }}
       links={{

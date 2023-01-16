@@ -7,9 +7,7 @@ import { PLPProps } from '../../types'
 import { decomposeHandle } from '../../utils/collectionsHandle'
 import { fetchCollectionEntry } from '../../data/contentful/fetchCollectionEntry'
 
-import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../../shopstory/shopstoryConfig'
-import { shopstoryContentfulParams } from '../../shopstory/shopstoryContentfulParams'
 import { ShopstoryClient } from '@shopstory/core/client'
 
 const Page: NextPage<PLPProps> = (props) => {
@@ -49,7 +47,7 @@ export const getStaticProps: GetStaticProps<PLPProps> = async ({ params, preview
     }
   }
 
-  const shopstoryClient = new ShopstoryClient(shopstoryConfig, contentfulClientSetup(shopstoryContentfulParams), {
+  const shopstoryClient = new ShopstoryClient(shopstoryConfig, {
     locale: locale ?? 'en-US'
   })
 
@@ -57,7 +55,7 @@ export const getStaticProps: GetStaticProps<PLPProps> = async ({ params, preview
     mode: 'grid'
   })
 
-  const meta = await shopstoryClient.fetch()
+  const meta = await shopstoryClient.build()
 
   const { filters, collection, pagination, numberOfItems } = filterCollection(fullCollection, values)
 

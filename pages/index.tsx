@@ -1,10 +1,7 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
-import { contentfulClientSetup } from '@shopstory/core/contentful/clientSetup'
 import { shopstoryConfig } from '../shopstory/shopstoryConfig'
-import { shopstoryContentfulParams } from '../shopstory/shopstoryContentfulParams'
-import { Metadata, RenderableContentPiece } from '@shopstory/core'
+import { Metadata, RenderableContent } from '@shopstory/core'
 import { Shopstory } from '@shopstory/core/react'
 import { fetchHomepageEntry } from '../data/contentful/fetchHomepageEntry'
 import { PageWrapper } from '../components/common/PageWrapper/PageWrapper'
@@ -12,7 +9,7 @@ import { ShopstoryClient } from '@shopstory/core/client'
 import { DemoShopstoryProvider } from '../shopstory/ShopstoryProvider'
 
 type HomeProps = {
-  content: RenderableContentPiece
+  content: RenderableContent
   meta: Metadata
 }
 
@@ -41,16 +38,15 @@ export const getStaticProps: GetStaticProps<HomeProps, { slug: string }> = async
     return { notFound: true }
   }
 
-  const shopstoryClient = new ShopstoryClient(
-    shopstoryConfig,
-    contentfulClientSetup({ ...shopstoryContentfulParams, enablePreview: !!preview }),
-    {
-      locale
+  const shopstoryClient = new ShopstoryClient(shopstoryConfig, {
+    locale,
+    contentful: {
+      preview: !!preview
     }
-  )
+  })
 
   const content = shopstoryClient.add(entry.fields.shopstory)
-  const meta = await shopstoryClient.fetch()
+  const meta = await shopstoryClient.build()
 
   return {
     props: { content, meta },

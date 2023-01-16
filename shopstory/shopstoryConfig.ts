@@ -1,14 +1,11 @@
-/**
- * Shopstory config.
- */
-
-import { Config, FetchResourcesOutput } from '@shopstory/core'
+import type { Config, FetchResourcesOutput } from '@shopstory/core'
+import { contentfulPlugin } from '@shopstory/core/contentful'
 import { fetchProductsByIds } from '../data/shopify/fetchProductsByIds'
 import fetchProducts from '../data/shopify/fetchProducts'
+import { shopifyProductPickerField } from '@shopstory/core/shopify'
+import { shopstoryContentfulParams } from './shopstoryContentfulParams'
 
 export const shopstoryConfig: Config = {
-  spaceId: 'shopstory-demo',
-  accessToken: process.env.NEXT_PUBLIC_SHOPSTORY_ACCESS_TOKEN,
   actions: [],
 
   /**
@@ -28,7 +25,8 @@ export const shopstoryConfig: Config = {
     {
       id: 'color_black_01',
       label: 'Black 01',
-      value: '#252525'
+      value: '#252525',
+      mapTo: ['$dark', '$backgroundDark']
     },
     {
       id: 'color_black_02',
@@ -43,7 +41,8 @@ export const shopstoryConfig: Config = {
     {
       id: 'white_01',
       label: 'White 01',
-      value: '#f9f8f3'
+      value: '#f9f8f3',
+      mapTo: ['$light', '$backgroundLight']
     },
     {
       id: 'white_02',
@@ -111,10 +110,12 @@ export const shopstoryConfig: Config = {
           type: 'boolean'
         }
       ]
-    },
+    }
+  ],
+
+  buttons: [
     {
       id: 'Button',
-      type: 'button',
       schema: [
         {
           prop: 'appearance',
@@ -128,55 +129,40 @@ export const shopstoryConfig: Config = {
   /**
    * Devices / breakpoints
    */
-  devices: [
-    {
-      breakpoint: 480,
+  devices: {
+    xs: {
+      // startsFrom: 480,
       h: 667,
-      id: 'xs',
-      label: 'Phone',
       w: 375
     },
-    {
-      breakpoint: 768,
+    sm: {
+      // startsFrom: 768,
       h: 375,
       hidden: true,
-      id: 'sm',
-      label: 'Phone SM h',
       w: 667
     },
-    {
-      breakpoint: 1024,
+    md: {
+      // startsFrom: 1024,
       h: 1024,
-      id: 'md',
-      label: 'Tablet',
       w: 768
-      // hidden: true
     },
-    {
-      breakpoint: 1280,
-      id: 'lg',
+    lg: {
+      // startsFrom: 1280,
       w: 1024,
       h: 768,
-      label: 'TabletH',
       hidden: true
     },
-    {
-      breakpoint: 1680,
+    xl: {
+      // startsFrom: 1680,
       h: 768,
-      id: 'xl',
-      isMain: true,
-      label: 'Laptop',
       w: 1366
     },
-    {
-      breakpoint: null,
+    '2xl': {
       h: 920,
       hidden: true,
-      id: '2xl',
-      label: 'Desktop',
       w: 1920
     }
-  ],
+  },
 
   /**
    * Font tokens
@@ -189,7 +175,8 @@ export const shopstoryConfig: Config = {
         fontSize: 20,
         lineHeight: 1.8,
         fontFamily: 'test-soehne-mono'
-      }
+      },
+      mapTo: ['$body', '$body.bold']
     },
     {
       id: 'body-small',
@@ -198,7 +185,8 @@ export const shopstoryConfig: Config = {
         fontSize: 13,
         lineHeight: 1.8,
         fontFamily: 'test-soehne-mono'
-      }
+      },
+      mapTo: ['$body2', '$body2.bold']
     },
     {
       id: 'heading1',
@@ -211,7 +199,8 @@ export const shopstoryConfig: Config = {
         '@sm': {
           fontSize: 36 // responsiveness is easy
         }
-      }
+      },
+      mapTo: '$heading1'
     },
     {
       id: 'heading2',
@@ -224,7 +213,8 @@ export const shopstoryConfig: Config = {
         '@sm': {
           fontSize: 24 // responsiveness is easy
         }
-      }
+      },
+      mapTo: '$heading2'
     },
     {
       id: 'heading3',
@@ -234,7 +224,8 @@ export const shopstoryConfig: Config = {
         fontSize: 21,
         lineHeight: 1.4,
         fontWeight: 600
-      }
+      },
+      mapTo: '$heading3'
     },
     {
       id: 'heading4',
@@ -244,7 +235,8 @@ export const shopstoryConfig: Config = {
         fontSize: 16,
         lineHeight: 1.4,
         fontWeight: 600
-      }
+      },
+      mapTo: '$heading4'
     },
     {
       id: 'heading5',
@@ -334,13 +326,34 @@ export const shopstoryConfig: Config = {
     }
   ],
 
-  types: {
+  resourceTypes: {
     /**
      * In Shopstory config we used "resource" type for product in a ProductCard schema. This is not Shopstory-defined type, so we must pass the instruction how to fetch it.
      *
      * Below we're defining "fetch function" that transforms unresolved product resources to the product objects necessary for ProductCard. It is totally custom and up to the developers.
      */
     product: {
+      /**
+       * For custom "product" resource type we must define the editor widget.
+       *
+       * Here we're using built-in "shopifyProductPickerField" that automatically integrates with Shopify.
+       *
+       * It is easy to create custom widgets here and connect to any e-commerce platform.
+       */
+      widget: () => {
+        if (!process.env.NEXT_PUBLIC_STOREFRONT_NAME) {
+          throw new Error('no shopify storefront name')
+        }
+
+        if (!process.env.NEXT_PUBLIC_STOREFRONT_ACCESS_TOKEN) {
+          throw new Error('no shopify access token')
+        }
+
+        return shopifyProductPickerField({
+          store: process.env.NEXT_PUBLIC_STOREFRONT_NAME,
+          storefrontAccessToken: process.env.NEXT_PUBLIC_STOREFRONT_ACCESS_TOKEN
+        })
+      },
       fetch: async (resources) => {
         const ids = resources.map((resource) => resource.id)
         const products = await fetchProductsByIds(ids)
@@ -352,7 +365,7 @@ export const shopstoryConfig: Config = {
             const relatedProducts = await fetchProducts('tag:' + relatedTag)
 
             result.push({
-              ...resources.find((resource) => resource.id === product.id)!,
+              ...resources.find((resource) => decodeObjectId(resource.id) === product.id)!,
               value: {
                 ...product,
                 relatedProducts
@@ -364,5 +377,158 @@ export const shopstoryConfig: Config = {
         return result
       }
     }
+  },
+
+  plugins: [contentfulPlugin(shopstoryContentfulParams)],
+
+  unstable_templates: [
+    {
+      label: 'Button Dark',
+      mapTo: 'buttonDark',
+      config: {
+        _template: 'Button',
+        appearance: 'solidBlack'
+      }
+    },
+
+    {
+      label: 'Button Light',
+      mapTo: 'buttonLight',
+      config: {
+        _template: 'Button',
+        appearance: 'solidWhite'
+      }
+    },
+
+    {
+      label: 'Text Button',
+      mapTo: ['buttonTextDark', 'buttonTextLight'],
+      config: {
+        _template: 'Button',
+        appearance: 'underlinedBlack'
+      }
+    },
+
+    {
+      mapTo: ['buttonSliderLeft', 'buttonSliderLeftDark'],
+      config: {
+        _template: '$IconButton2',
+        action: [],
+        symbol: [
+          {
+            _template: '$icon',
+            icon: {
+              ref: '$sliderLeft'
+            },
+            color: {
+              $res: true,
+              xl: {
+                ref: 'white_01',
+                value: '#f9f8f3'
+              }
+            }
+          }
+        ],
+        hasBackground: true,
+        backgroundColor: {
+          $res: true,
+          xl: {
+            ref: 'color_black_01'
+          }
+        },
+        hasBorder: false,
+        borderWidth: '1',
+        borderColor: {
+          $res: true,
+          xl: {
+            ref: 'color_black_01'
+          }
+        },
+        symbolSize: {
+          $res: true,
+          xl: '24'
+        },
+        buttonSize: {
+          $res: true,
+          xl: '48'
+        },
+        shape: 'circle',
+        label: {
+          id: 'local.caf60360-0080-44b3-b62b-ba9a942487ec',
+          value: {
+            main: 'Previous'
+          }
+        },
+        traceImpressions: false,
+        traceClicks: false
+      }
+    },
+
+    {
+      mapTo: ['buttonSliderRight', 'buttonSliderRightDark'],
+      config: {
+        _template: '$IconButton2',
+        action: [],
+        symbol: [
+          {
+            _template: '$icon',
+            icon: {
+              ref: '$sliderRight'
+            },
+            color: {
+              $res: true,
+              xl: {
+                ref: 'white_01',
+                value: '#f9f8f3'
+              }
+            }
+          }
+        ],
+        hasBackground: true,
+        backgroundColor: {
+          $res: true,
+          xl: {
+            ref: 'color_black_01'
+          }
+        },
+        hasBorder: false,
+        borderWidth: '1',
+        borderColor: {
+          $res: true,
+          xl: {
+            ref: 'color_black_01'
+          }
+        },
+        symbolSize: {
+          $res: true,
+          xl: '24'
+        },
+        buttonSize: {
+          $res: true,
+          xl: '48'
+        },
+        shape: 'circle',
+        label: {
+          id: 'local.caf60360-0080-44b3-b62b-ba9a942487ec',
+          value: {
+            main: 'Next'
+          }
+        },
+        traceImpressions: false,
+        traceClicks: false
+      }
+    }
+  ]
+}
+
+function decodeObjectId(id: string) {
+  if (isGid(id)) {
+    return id
   }
+
+  return typeof window === 'undefined' ? Buffer.from(id, 'base64').toString('utf-8') : window.atob(id)
+}
+
+function isGid(id: string) {
+  return id.startsWith('gid://shopify/')
 }
