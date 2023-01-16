@@ -1,4 +1,4 @@
-import { Metadata, RenderableContentPiece } from '@shopstory/core'
+import { Metadata, RenderableContent } from '@shopstory/core'
 
 export type Path = {
   params: {
@@ -86,7 +86,7 @@ export type PLPProps = {
     max: number
   }
   numberOfItems: number
-  renderableContent: RenderableContentPiece
+  renderableContent: RenderableContent
   meta: Metadata
 }
 
