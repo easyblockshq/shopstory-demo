@@ -364,12 +364,18 @@ export const shopstoryConfig: Config = {
             const relatedTag = product.tags?.find((tag: any) => tag.startsWith('related'))
             const relatedProducts = await fetchProducts('tag:' + relatedTag)
 
-            result.push({
-              ...resources.find((resource) => decodeObjectId(resource.id) === product.id)!,
-              value: {
-                ...product,
-                relatedProducts
-              }
+            const relatedResources = resources.filter((resource) => {
+              return decodeObjectId(resource.id) === decodeObjectId(product.id)
+            })
+
+            relatedResources.forEach((relatedResource) => {
+              result.push({
+                ...relatedResource,
+                value: {
+                  ...product,
+                  relatedProducts
+                }
+              })
             })
           })
         )
